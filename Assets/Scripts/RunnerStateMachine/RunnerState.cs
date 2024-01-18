@@ -1,4 +1,4 @@
-public abstract class CharacterState : IState
+public abstract class RunnerState : IState
 {
     protected RunnerControllerStateMachine m_stateMachine;
 
