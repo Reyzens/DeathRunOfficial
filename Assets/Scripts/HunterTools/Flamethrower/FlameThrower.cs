@@ -6,6 +6,7 @@ public class FlamethrowerActivation : MonoBehaviour
     private ParticleSystem m_flameSystem;
     [SerializeField]
     private float m_flameMaxDuration;
+
     private float m_currentFlameDuration;
     // Start is called before the first frame update
     void Start()
