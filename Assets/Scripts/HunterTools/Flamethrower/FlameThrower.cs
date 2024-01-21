@@ -23,7 +23,7 @@ public class FlamethrowerActivation : MonoBehaviour
             {
                 m_flameSystem.gameObject.SetActive(false);
             }
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.Keypad1))
             {
                 //Debug.Log("W pressed");
                 m_flameSystem.gameObject.SetActive(true);
