@@ -32,6 +32,6 @@ public class TrapDoorController : MonoBehaviour
 
     void ActivatedEffect()
     {
-        transform.RotateAround(m_hinge.position, Vector3.up, m_rotationAngle * m_speed * Time.fixedDeltaTime);
+        transform.RotateAround(m_hinge.position, Vector3.up, m_rotationAngle * (m_speed * Time.fixedDeltaTime));
     }
 }
