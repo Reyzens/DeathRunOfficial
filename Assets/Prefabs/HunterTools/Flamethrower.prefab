@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 4177253353122566773}
   - component: {fileID: 6082935009279529195}
   - component: {fileID: 9101585288130190238}
+  - component: {fileID: 4824787558013495117}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -212,6 +213,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4824787558013495117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7879061542181942918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d646492af72f114eb38f560753a1a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_flameSystem: {fileID: 8447880057931637583}
+  m_flameMaxDuration: 2
 --- !u!1001 &8646162720979834915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -378,6 +393,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1b77e391f429ff4a837ddb91813e57a, type: 3}
+--- !u!198 &8447880057931637583 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198634506769759084, guid: a1b77e391f429ff4a837ddb91813e57a, type: 3}
+  m_PrefabInstance: {fileID: 8646162720979834915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8646162720979992265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 452330, guid: a1b77e391f429ff4a837ddb91813e57a, type: 3}
