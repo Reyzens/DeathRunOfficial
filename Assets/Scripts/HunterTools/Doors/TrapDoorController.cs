@@ -1,11 +1,10 @@
+using Mirror;
 using UnityEngine;
 
-public class TrapDoorController : MonoBehaviour
+public class TrapDoorController : NetworkBehaviour
 {
     [SerializeField]
     private float m_speed;
-    [SerializeField]
-    private Transform m_hinge;
     [SerializeField]
     private float m_rotationAngle;
     [SerializeField]
@@ -30,8 +29,9 @@ public class TrapDoorController : MonoBehaviour
         }
     }
 
+    [ClientRpc]
     void ActivatedEffect()
     {
-        transform.RotateAround(m_hinge.position, Vector3.up, m_rotationAngle * (m_speed * Time.fixedDeltaTime));
+        transform.RotateAround(transform.position, Vector3.up, m_rotationAngle * (m_speed * Time.fixedDeltaTime));
     }
 }

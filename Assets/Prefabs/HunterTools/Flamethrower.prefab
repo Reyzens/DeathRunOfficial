@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4831216870531033763}
   - component: {fileID: 4761189021568827015}
   - component: {fileID: 8034364594788042297}
+  - component: {fileID: 4174943178349012410}
   m_Layer: 0
   m_Name: Flamethrower
   m_TagString: Untagged
@@ -107,6 +108,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4174943178349012410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345789782826574939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d646492af72f114eb38f560753a1a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  m_flameSystem: {fileID: 8447880057931637583}
+  m_flameMaxDuration: 5
 --- !u!1 &7879061542181942918
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d646492af72f114eb38f560753a1a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   m_flameSystem: {fileID: 8447880057931637583}
   m_flameMaxDuration: 2
 --- !u!1001 &8646162720979834915
