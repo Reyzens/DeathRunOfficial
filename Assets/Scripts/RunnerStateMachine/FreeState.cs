@@ -6,31 +6,26 @@ public class FreeState : RunnerState
 {
     public override void OnEnter()
     {
-
-    }
-
-    public override void OnExit()
-    {
-
+        Debug.Log("Enter state: FreeState\n");
     }
 
     public override void OnFixedUpdate()
     {
-
+       m_stateMachine.ApplyMovement();
     }
 
-    public override void OnUpdate()
+    public override void OnExit()
     {
-
+        Debug.Log("Exit state: FreeState\n");
     }
 
     public override bool CanEnter(IState currentState)
     {
-        throw new System.NotImplementedException();
+        return m_stateMachine.IsInContactWithGround();
     }
 
     public override bool CanExit()
     {
-        throw new System.NotImplementedException();
+        return true;
     }
 }

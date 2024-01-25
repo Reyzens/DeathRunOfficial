@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class JumpState : RunnerState
 {
+    private const float STATE_EXIT_TIMER = 0.2f;
+    private float m_currentStateTimer;
     public override void OnEnter()
     {
-
+        Debug.Log("Exit state: JumpingState");
+        m_stateMachine.RB.AddForce(Vector3.up * m_stateMachine.m_jumpIntensity, ForceMode.Acceleration);
+        m_currentStateTimer = STATE_EXIT_TIMER;
+        m_stateMachine.Animator.SetTrigger("Jump");
     }
 
     public override void OnExit()
     {
-
+        Debug.Log("Exit state: JumpingState");
+        m_stateMachine.m_isJumping = false;
     }
 
     public override void OnFixedUpdate()
@@ -21,16 +27,16 @@ public class JumpState : RunnerState
 
     public override void OnUpdate()
     {
-
+        m_currentStateTimer -= Time.deltaTime;
     }
 
     public override bool CanEnter(IState currentState)
     {
-        throw new System.NotImplementedException();
+        return m_stateMachine.m_isJumping;
     }
 
     public override bool CanExit()
     {
-        throw new System.NotImplementedException();
+        return m_stateMachine.IsInContactWithGround() && m_currentStateTimer <= 0;
     }
 }

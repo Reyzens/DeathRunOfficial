@@ -26,11 +26,11 @@ public class RollState : RunnerState
 
     public override bool CanEnter(IState currentState)
     {
-        throw new System.NotImplementedException();
+        return false;
     }
 
     public override bool CanExit()
     {
-        throw new System.NotImplementedException();
+        return false;
     }
 }
