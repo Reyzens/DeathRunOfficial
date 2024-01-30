@@ -16,7 +16,10 @@ public class TrapDoorController : NetworkBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Keypad2) && m_currentRotationTime < 0)
         {
-            m_currentRotationTime = m_rotationTime;
+            if (isClient)
+            {
+                CommandActivatedEffect();
+            }
         }
     }
 
@@ -25,13 +28,19 @@ public class TrapDoorController : NetworkBehaviour
         if (m_currentRotationTime > 0)
         {
             m_currentRotationTime -= Time.fixedDeltaTime;
-            ActivatedEffect();
+            transform.RotateAround(transform.position, Vector3.up, m_rotationAngle * (m_speed * Time.fixedDeltaTime));
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CommandActivatedEffect()
+    {
+        ActivatedEffect();
     }
 
     [ClientRpc]
     void ActivatedEffect()
     {
-        transform.RotateAround(transform.position, Vector3.up, m_rotationAngle * (m_speed * Time.fixedDeltaTime));
+        m_currentRotationTime = m_rotationTime;
     }
 }

@@ -2223,10 +2223,6 @@ PrefabInstance:
       propertyPath: sceneId
       value: 898373908
       objectReference: {fileID: 0}
-    - target: {fileID: 7256985228688988382, guid: fd19cd5c38945ff41af2d55ea8e49920, type: 3}
-      propertyPath: clientStarted
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7345789782826574939, guid: fd19cd5c38945ff41af2d55ea8e49920, type: 3}
       propertyPath: m_Name
       value: Flamethrower
