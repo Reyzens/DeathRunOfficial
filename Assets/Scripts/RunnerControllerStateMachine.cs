@@ -16,25 +16,27 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     public Vector2 m_input;
     public Vector3 m_direction;
 
-    [SerializeField]
     public float m_speed;
+    public float m_maxSpeed = 10;
 
-    [SerializeField]
     public float m_smoothTime = 0.05f;
     public float m_currentVelocity;
 
     public float m_velocity;
 
     #region Jump Variables
-    [SerializeField]
     public float m_jumpIntensity;
     public bool m_isJumping = false;
+    public int m_maxNumberOfJumps = 2;
+    public int m_numberOfJump;
+    public float m_airControlSpeed;
+    public float m_forwardJumpMultiplier = 0.2f;
+    public float m_sprintJumpBonus = 5f;
+    public bool m_wasSprintingBeforeJump = false;
     #endregion
 
     #region Sprint Variables
-    [SerializeField]
     public float m_sprintMultiplier = 2.0f;
-    [SerializeField]
     public float m_maxEnergyAmount = 3f;
     public float m_energyAmount;
     public bool m_isSprinting = false;
@@ -43,7 +45,9 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     #region Dead Variables
     public bool m_isAlive = true;
     #endregion
+
     public bool m_isWalking = false;
+    public bool m_isFalling = false;
 
 
     [SerializeField]
@@ -110,6 +114,15 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         {
             m_isJumping = true;
         }
+        else if (m_currentState is SprintState)
+        {
+            m_isJumping = true;
+            m_wasSprintingBeforeJump = true;
+        }
+        else if ((m_currentState is FallingState || m_currentState is JumpState) && m_numberOfJump < m_maxNumberOfJumps)
+        {
+            m_isJumping = true;
+        }
     }
 
     public void Sprint(InputAction.CallbackContext context)
@@ -124,6 +137,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         else if (context.canceled)
         {
             m_isSprinting = false;
+            Animator.SetBool("Sprinting", false);
         }
     }
 
@@ -141,8 +155,13 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
         Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-        RB.velocity = moveDirection.normalized * m_speed;
+        float yVelocity = RB.velocity.y;
+        Vector3 horizontalVelocity = moveDirection.normalized * m_speed;
+
+
+        RB.velocity = new Vector3(horizontalVelocity.x, yVelocity, horizontalVelocity.z);
     }
+
 
     public bool IsInContactWithGround()
     {

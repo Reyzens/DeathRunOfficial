@@ -8,21 +8,34 @@ public class JumpState : RunnerState
     private float m_currentStateTimer;
     public override void OnEnter()
     {
-        Debug.Log("Exit state: JumpingState");
-        m_stateMachine.RB.AddForce(Vector3.up * m_stateMachine.m_jumpIntensity, ForceMode.Acceleration);
-        m_currentStateTimer = STATE_EXIT_TIMER;
+        Debug.Log("Enter state: JumpingState");
         m_stateMachine.Animator.SetTrigger("Jump");
+
+        Vector3 jumpForce = Vector3.up * m_stateMachine.m_jumpIntensity;
+        if (m_stateMachine.m_wasSprintingBeforeJump)
+        {
+            jumpForce += Vector3.up * m_stateMachine.m_sprintJumpBonus;
+        }
+
+        m_stateMachine.RB.AddForce(jumpForce, ForceMode.Impulse);
+
+        m_stateMachine.m_wasSprintingBeforeJump = false;
+
+        m_stateMachine.m_numberOfJump += 1;
+        m_currentStateTimer = STATE_EXIT_TIMER;
     }
+
 
     public override void OnExit()
     {
         Debug.Log("Exit state: JumpingState");
         m_stateMachine.m_isJumping = false;
+        m_stateMachine.Animator.SetBool("Sprinting", false);
     }
 
     public override void OnFixedUpdate()
     {
-
+        m_stateMachine.ApplyMovement();
     }
 
     public override void OnUpdate()
@@ -37,6 +50,6 @@ public class JumpState : RunnerState
 
     public override bool CanExit()
     {
-        return m_stateMachine.IsInContactWithGround() && m_currentStateTimer <= 0;
+        return m_currentStateTimer <= 0 && m_stateMachine.IsInContactWithGround();
     }
 }

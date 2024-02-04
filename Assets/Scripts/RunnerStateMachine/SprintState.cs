@@ -27,7 +27,6 @@ public class SprintState : RunnerState
         Debug.Log("Exit state: SprintState\n");
         m_stateMachine.m_isSprinting = false;
         m_stateMachine.m_speed /= m_stateMachine.m_sprintMultiplier;
-        m_stateMachine.Animator.SetBool("Sprinting", false);
     }
 
     public override bool CanEnter(IState currentState)
@@ -37,6 +36,6 @@ public class SprintState : RunnerState
 
     public override bool CanExit()
     {
-        return m_stateMachine.m_energyAmount <= 0 || m_stateMachine.m_isSprinting == false;
+        return m_stateMachine.m_energyAmount <= 0 || m_stateMachine.m_isSprinting == false || m_stateMachine.m_isJumping;
     }
 }
