@@ -25,13 +25,13 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     public float m_velocity;
 
     #region Jump Variables
-    public float m_jumpIntensity;
+    public float m_jumpIntensity = 65f;
     public bool m_isJumping = false;
     public int m_maxNumberOfJumps = 2;
     public int m_numberOfJump;
     public float m_airControlSpeed;
     public float m_forwardJumpMultiplier = 0.2f;
-    public float m_sprintJumpBonus = 5f;
+    public float m_sprintJumpBonus = 10f;
     public bool m_wasSprintingBeforeJump = false;
     #endregion
 
