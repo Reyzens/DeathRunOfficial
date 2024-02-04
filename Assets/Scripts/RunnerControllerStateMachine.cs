@@ -31,6 +31,8 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
     [SerializeField]
     public float m_sprintMultiplier = 2.0f;
+    [SerializeField]
+    public float m_energyAmount = 5f;
     public bool m_isSprinting = false;
 
     public bool m_isWalking = false;

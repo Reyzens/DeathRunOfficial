@@ -8,9 +8,11 @@ public class SprintState : RunnerState
     private float m_currentStateTimer;
     public override void OnEnter()
     {
+
+        Debug.Log("Enter state: SprintState\n");
         m_stateMachine.m_speed *= m_stateMachine.m_sprintMultiplier;
         m_currentStateTimer = STATE_EXIT_TIMER;
-        Debug.Log("Enter state: SprintState\n");
+        m_stateMachine.Animator.SetBool("Sprinting", true);
     }
 
     public override void OnFixedUpdate()
@@ -25,9 +27,10 @@ public class SprintState : RunnerState
 
     public override void OnExit()
     {
+        Debug.Log("Exit state: SprintState\n");
         m_stateMachine.m_isSprinting = false;
         m_stateMachine.m_speed /= m_stateMachine.m_sprintMultiplier;
-        Debug.Log("Exit state: SprintState\n");
+        m_stateMachine.Animator.SetBool("Sprinting", false);
     }
 
     public override bool CanEnter(IState currentState)
