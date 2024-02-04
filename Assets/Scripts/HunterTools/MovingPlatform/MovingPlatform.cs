@@ -9,6 +9,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField]
     private float speed;
 
+
     private int coordinateIndex;
     private int lastCoordinateIndex;
     private Vector3 initialPosition;
@@ -50,7 +51,11 @@ public class MovingPlatform : MonoBehaviour
 
             if (isInReverse)
             {
-                if (nextCoordinate != initialPosition)
+                if (nextCoordinate == movingCoordinate[0].position)
+                {
+                    nextCoordinate = initialPosition;
+                }
+                else if (nextCoordinate != initialPosition)
                 {
                     coordinateIndex--;
                     nextCoordinate = movingCoordinate[coordinateIndex].position;
