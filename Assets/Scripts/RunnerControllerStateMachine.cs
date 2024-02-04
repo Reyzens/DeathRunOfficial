@@ -25,17 +25,24 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
     public float m_velocity;
 
+    #region Jump Variables
     [SerializeField]
     public float m_jumpIntensity;
     public bool m_isJumping = false;
+    #endregion
 
+    #region Sprint Variables
     [SerializeField]
     public float m_sprintMultiplier = 2.0f;
     [SerializeField]
     public float m_maxEnergyAmount = 3f;
     public float m_energyAmount;
     public bool m_isSprinting = false;
+    #endregion
 
+    #region Dead Variables
+    public bool m_isAlive = true;
+    #endregion
     public bool m_isWalking = false;
 
 
