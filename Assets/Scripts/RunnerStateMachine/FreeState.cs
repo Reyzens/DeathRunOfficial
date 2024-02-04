@@ -11,7 +11,13 @@ public class FreeState : RunnerState
 
     public override void OnFixedUpdate()
     {
-       m_stateMachine.ApplyMovement();
+        m_stateMachine.ApplyMovement();
+    }
+
+    public override void OnUpdate()
+    {
+        if (m_stateMachine.m_energyAmount < m_stateMachine.m_maxEnergyAmount)
+            m_stateMachine.m_energyAmount += Time.deltaTime;
     }
 
     public override void OnExit()

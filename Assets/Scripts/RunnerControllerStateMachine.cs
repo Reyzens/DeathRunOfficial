@@ -32,7 +32,8 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     [SerializeField]
     public float m_sprintMultiplier = 2.0f;
     [SerializeField]
-    public float m_energyAmount = 5f;
+    public float m_maxEnergyAmount = 3f;
+    public float m_energyAmount;
     public bool m_isSprinting = false;
 
     public bool m_isWalking = false;
@@ -106,11 +107,16 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
     public void Sprint(InputAction.CallbackContext context)
     {
-        if (!context.started) return;
-
-        if (m_currentState is FreeState)
+        if (context.started)
         {
-            m_isSprinting = true;
+            if (m_currentState is FreeState)
+            {
+                m_isSprinting = true;
+            }
+        }
+        else if (context.canceled)
+        {
+            m_isSprinting = false;
         }
     }
 

@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class SprintState : RunnerState
 {
-    private const float STATE_EXIT_TIMER = 3f;
-    private float m_currentStateTimer;
     public override void OnEnter()
     {
 
         Debug.Log("Enter state: SprintState\n");
         m_stateMachine.m_speed *= m_stateMachine.m_sprintMultiplier;
-        m_currentStateTimer = STATE_EXIT_TIMER;
         m_stateMachine.Animator.SetBool("Sprinting", true);
     }
 
@@ -22,9 +19,9 @@ public class SprintState : RunnerState
 
     public override void OnUpdate()
     {
-        m_currentStateTimer -= Time.deltaTime;
+        Debug.Log("Engergy left: " + m_stateMachine.m_energyAmount);
+        m_stateMachine.m_energyAmount -= Time.deltaTime;
     }
-
     public override void OnExit()
     {
         Debug.Log("Exit state: SprintState\n");
@@ -35,11 +32,11 @@ public class SprintState : RunnerState
 
     public override bool CanEnter(IState currentState)
     {
-        return m_stateMachine.m_isSprinting;
+        return m_stateMachine.m_isSprinting && m_stateMachine.m_energyAmount > 0f;
     }
 
     public override bool CanExit()
     {
-        return m_currentStateTimer <= 0;
+        return m_stateMachine.m_energyAmount <= 0 || m_stateMachine.m_isSprinting == false;
     }
 }
