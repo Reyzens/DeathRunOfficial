@@ -21,7 +21,7 @@ public class JumpState : RunnerState
 
         m_stateMachine.m_wasSprintingBeforeJump = false;
 
-        m_stateMachine.m_numberOfJump += 1;
+        m_stateMachine.m_numberOfJump++;
         m_currentStateTimer = STATE_EXIT_TIMER;
     }
 
@@ -40,6 +40,10 @@ public class JumpState : RunnerState
 
     public override void OnUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Space) && m_stateMachine.m_numberOfJump < m_stateMachine.m_maxNumberOfJumps)
+        {
+            m_stateMachine.m_isDoubleJumping = true;
+        }
         m_currentStateTimer -= Time.deltaTime;
     }
 
@@ -50,6 +54,6 @@ public class JumpState : RunnerState
 
     public override bool CanExit()
     {
-        return m_currentStateTimer <= 0 && m_stateMachine.IsInContactWithGround();
+        return (m_currentStateTimer <= 0 && m_stateMachine.IsInContactWithGround()) || m_stateMachine.m_isDoubleJumping;
     }
 }

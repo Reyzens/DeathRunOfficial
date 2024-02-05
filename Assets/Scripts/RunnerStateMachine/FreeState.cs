@@ -6,8 +6,8 @@ public class FreeState : RunnerState
 {
     public override void OnEnter()
     {
-        Debug.Log("Enter state: FreeState\n");
         m_stateMachine.m_numberOfJump = 0;
+        Debug.Log("Enter state: FreeState\n");
     }
 
     public override void OnFixedUpdate()

@@ -17,19 +17,16 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     public Vector3 m_direction;
 
     public float m_speed;
-    public float m_maxSpeed = 10;
 
     public float m_smoothTime = 0.05f;
     public float m_currentVelocity;
 
-    public float m_velocity;
-
     #region Jump Variables
     public float m_jumpIntensity = 65f;
     public bool m_isJumping = false;
+    public bool m_isDoubleJumping = false;
     public int m_maxNumberOfJumps = 2;
-    public int m_numberOfJump;
-    public float m_airControlSpeed;
+    public int m_numberOfJump = 0;
     public float m_forwardJumpMultiplier = 0.2f;
     public float m_sprintJumpBonus = 10f;
     public bool m_wasSprintingBeforeJump = false;
@@ -119,10 +116,6 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
             m_isJumping = true;
             m_wasSprintingBeforeJump = true;
         }
-        else if ((m_currentState is FallingState || m_currentState is JumpState) && m_numberOfJump < m_maxNumberOfJumps)
-        {
-            m_isJumping = true;
-        }
     }
 
     public void Sprint(InputAction.CallbackContext context)
@@ -161,7 +154,6 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
         RB.velocity = new Vector3(horizontalVelocity.x, yVelocity, horizontalVelocity.z);
     }
-
 
     public bool IsInContactWithGround()
     {
