@@ -40,10 +40,6 @@ public class JumpState : RunnerState
 
     public override void OnUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && m_stateMachine.m_numberOfJump < m_stateMachine.m_maxNumberOfJumps)
-        {
-            m_stateMachine.m_isDoubleJumping = true;
-        }
         m_currentStateTimer -= Time.deltaTime;
     }
 

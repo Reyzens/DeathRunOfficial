@@ -25,6 +25,7 @@ public class SprintState : RunnerState
     public override void OnExit()
     {
         Debug.Log("Exit state: SprintState\n");
+        m_stateMachine.Animator.SetBool("Sprinting", false);
         m_stateMachine.m_isSprinting = false;
         m_stateMachine.m_speed /= m_stateMachine.m_sprintMultiplier;
     }

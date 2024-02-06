@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingState : RunnerState
+public class CrouchState : RunnerState
 {
     public override void OnEnter()
     {

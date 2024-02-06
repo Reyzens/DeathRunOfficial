@@ -43,6 +43,14 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     public bool m_isAlive = true;
     #endregion
 
+    #region Crouch Variables
+    public bool m_isCrouching = false;
+    #endregion
+
+    #region Roll Variables
+    public bool m_isRolling = false;
+    #endregion
+
     public bool m_isWalking = false;
     public bool m_isFalling = false;
 
@@ -60,7 +68,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         m_possibleStates.Add(new SprintState());
         m_possibleStates.Add(new JumpState());
         m_possibleStates.Add(new DoubleJumpState());
-        m_possibleStates.Add(new FallingState());
+        m_possibleStates.Add(new CrouchState());
         m_possibleStates.Add(new RollState());
         m_possibleStates.Add(new DeadState());
     }
@@ -105,6 +113,12 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     public void Jump(InputAction.CallbackContext context)
     {
         if (!context.started) return;
+
+        if (m_currentState is JumpState)
+        {
+            m_isDoubleJumping = true;
+        }
+
         if (!IsInContactWithGround()) return;
 
         if (m_currentState is FreeState)
@@ -131,6 +145,25 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         {
             m_isSprinting = false;
             Animator.SetBool("Sprinting", false);
+        }
+    }
+
+    public void Crouch(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        if (!IsInContactWithGround()) return;
+
+        if (m_currentState is FreeState)
+        {
+            m_isCrouching = true;
+        }
+        else if (m_currentState is SprintState)
+        {
+            m_isRolling = true;
+        }
+        else if (m_currentState is CrouchState)
+        {
+            m_isCrouching = false;
         }
     }
 
