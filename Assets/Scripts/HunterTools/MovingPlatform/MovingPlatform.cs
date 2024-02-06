@@ -23,13 +23,13 @@ public class MovingPlatform : MonoBehaviour
         lastCoordinateIndex = movingCoordinate.Count - 1;
         isInReverse = false;
         initialPosition = transform.position;
-        Debug.Log(movingCoordinate[0].position);
+        //Debug.Log(movingCoordinate[0].position);
         nextCoordinate = movingCoordinate[coordinateIndex].position;
     }
 
     void Update()
     {
-        Debug.Log("Update platform");
+        //Debug.Log("Update platform");
         UpdatePosition();
 
         if (transform.position == nextCoordinate)
