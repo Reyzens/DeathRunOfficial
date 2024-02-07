@@ -15,14 +15,9 @@ public class CheckpointTracker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (checkpoints.Contains(other.gameObject))
+        if (other.gameObject.CompareTag("Player"))
         {
-            visitedCheckpoints.Add(other.gameObject);
-            if (visitedCheckpoints.Count == checkpoints.Count)
-            {
-                Debug.Log("All checkpoints visited!");
-                WinGame();
-            }
+            Debug.Log("You've won the game!");
         }
     }
 
