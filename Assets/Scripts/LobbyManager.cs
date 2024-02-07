@@ -10,7 +10,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField]
     private GameObject m_lobbySelection;
     [SerializeField]
-    private TextMeshPro m_playerName;
+    private TextMeshProUGUI m_playerName;
     [SerializeField]
     private GameObject m_teamSelection;
 
