@@ -23,16 +23,17 @@ public class TrapManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyUp(KeyCode.I)) { OnFTSet1(); }
     }
 
     public void OnFTSet1()
     {
+        Debug.Log("Button clicked");
         if (isClient)
         {
             foreach (FlamethrowerActivation flamethrower in m_flamethrowerSerieOne)
             {
-                //flamethrower.CommandActivatedEffect();
+                flamethrower.CommandActivatedEffect();
             }
         }
     }
@@ -43,7 +44,7 @@ public class TrapManager : NetworkBehaviour
         {
             foreach (FlamethrowerActivation flamethrower in m_flamethrowerSerieTwo)
             {
-                //flamethrower.CommandActivatedEffect();
+                flamethrower.CommandActivatedEffect();
             }
         }
     }
