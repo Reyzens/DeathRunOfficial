@@ -10,7 +10,11 @@ public class MapRotator : MonoBehaviour
     private float m_max_rotation;
 
     private float m_speedIncreaseRatio;
-    private float m_currentRotationStrength = 0.0f;
+
+    private float m_currentRotationStrengthUp = 0.0f;
+    private float m_currentRotationStrengthDown = 0.0f;
+    private float m_currentRotationStrengthRight = 0.0f;
+    private float m_currentRotationStrengthLeft = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,36 +27,36 @@ public class MapRotator : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            CommandActivatedEffect(Vector3.forward);
+            CommandActivatedEffect(Vector3.forward, ref m_currentRotationStrengthUp);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            CommandActivatedEffect(Vector3.forward * -1);
+            CommandActivatedEffect(Vector3.forward * -1, ref m_currentRotationStrengthDown);
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            CommandActivatedEffect(Vector3.right * -1);
+            CommandActivatedEffect(Vector3.right * -1, ref m_currentRotationStrengthLeft);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            CommandActivatedEffect(Vector3.right);
+            CommandActivatedEffect(Vector3.right, ref m_currentRotationStrengthRight);
         }
 
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            ResetRotationValue();
+            m_currentRotationStrengthUp = 0.0f; ;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            ResetRotationValue();
+            m_currentRotationStrengthDown = 0.0f;
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            ResetRotationValue();
+            m_currentRotationStrengthRight = 0.0f;
         }
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            ResetRotationValue();
+            m_currentRotationStrengthLeft = 0.0f;
         }
     }
     private float NormalizeAngle(float angle)
@@ -62,17 +66,12 @@ public class MapRotator : MonoBehaviour
         return angle;
     }
 
-    private void ResetRotationValue()
-    {
-        m_currentRotationStrength = 0.0f;
-    }
-
-    private void CommandActivatedEffect(Vector3 direction)
+    private void CommandActivatedEffect(Vector3 direction, ref float currentRotationStrength)
     {
         //Debug.Log(m_currentRotationStrength);
 
         //Predict current tilt
-        float predictedCurrentStrength = Mathf.Min(m_currentRotationStrength + m_speedIncreaseRatio * Time.deltaTime, m_rotationSpeed) * Time.deltaTime;
+        float predictedCurrentStrength = Mathf.Min(currentRotationStrength + m_speedIncreaseRatio * Time.deltaTime, m_rotationSpeed) * Time.deltaTime;
         Quaternion predictedRotation = Quaternion.Euler(transform.eulerAngles + direction * predictedCurrentStrength);
         Vector3 predictedAngle = predictedRotation.eulerAngles;
 
@@ -81,8 +80,8 @@ public class MapRotator : MonoBehaviour
 
         if (Mathf.Abs(normalizedX) < m_max_rotation && Mathf.Abs(normalizedZ) < m_max_rotation)
         {
-            m_currentRotationStrength = Mathf.Min(m_currentRotationStrength + m_speedIncreaseRatio * Time.deltaTime, m_rotationSpeed);
-            transform.Rotate(direction * m_currentRotationStrength * Time.deltaTime);
+            currentRotationStrength = Mathf.Min(currentRotationStrength + m_speedIncreaseRatio * Time.deltaTime, m_rotationSpeed);
+            transform.Rotate(direction * currentRotationStrength * Time.deltaTime);
         }
     }
 }
