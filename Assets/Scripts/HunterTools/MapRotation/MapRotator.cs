@@ -9,7 +9,6 @@ public class MapRotator : MonoBehaviour
     [SerializeField]
     private float m_max_rotation;
 
-    private float m_currentRotationTime = 0.0f;
     private float m_speedIncreaseRatio;
     private float m_currentRotationStrength = 0.0f;
 
@@ -56,6 +55,12 @@ public class MapRotator : MonoBehaviour
             ResetRotationValue();
         }
     }
+    private float NormalizeAngle(float angle)
+    {
+        while (angle > 180) angle -= 360;
+        while (angle < -180) angle += 360;
+        return angle;
+    }
 
     private void ResetRotationValue()
     {
@@ -64,8 +69,20 @@ public class MapRotator : MonoBehaviour
 
     private void CommandActivatedEffect(Vector3 direction)
     {
-        Debug.Log(m_currentRotationStrength);
-        m_currentRotationStrength = Mathf.Min(m_currentRotationStrength + m_speedIncreaseRatio * Time.deltaTime, m_rotationSpeed);
-        transform.Rotate(direction * m_currentRotationStrength * Time.deltaTime);
+        //Debug.Log(m_currentRotationStrength);
+
+        //Predict current tilt
+        float predictedCurrentStrength = Mathf.Min(m_currentRotationStrength + m_speedIncreaseRatio * Time.deltaTime, m_rotationSpeed) * Time.deltaTime;
+        Quaternion predictedRotation = Quaternion.Euler(transform.eulerAngles + direction * predictedCurrentStrength);
+        Vector3 predictedAngle = predictedRotation.eulerAngles;
+
+        float normalizedX = NormalizeAngle(predictedAngle.x);
+        float normalizedZ = NormalizeAngle(predictedAngle.z);
+
+        if (Mathf.Abs(normalizedX) < m_max_rotation && Mathf.Abs(normalizedZ) < m_max_rotation)
+        {
+            m_currentRotationStrength = Mathf.Min(m_currentRotationStrength + m_speedIncreaseRatio * Time.deltaTime, m_rotationSpeed);
+            transform.Rotate(direction * m_currentRotationStrength * Time.deltaTime);
+        }
     }
 }
