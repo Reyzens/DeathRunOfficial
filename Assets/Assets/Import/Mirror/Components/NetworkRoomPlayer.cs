@@ -11,6 +11,19 @@ namespace Mirror
     [HelpURL("https://mirror-networking.gitbook.io/docs/components/network-room-player")]
     public class NetworkRoomPlayer : NetworkBehaviour
     {
+        [SerializeField]
+        GameObject m_Btnprefab;
+        
+
+        [SerializeField]
+        string m_userName;
+        
+        enum Playerteam
+        {
+            Hunter,
+            Runner
+        }
+
         /// <summary>
         /// This flag controls whether the default UI is shown for the room player.
         /// <para>As this UI is rendered using the old GUI system, it is only recommended for testing purposes.</para>
@@ -114,7 +127,24 @@ namespace Mirror
         /// This is a hook that is invoked on clients for all room player objects when entering the room.
         /// <para>Note: isLocalPlayer is not guaranteed to be set until OnStartLocalPlayer is called.</para>
         /// </summary>
-        public virtual void OnClientEnterRoom() {}
+        public virtual void OnClientEnterRoom() 
+        {
+            Instantiate(m_Btnprefab, GameObject.Find("WaitingList").transform);
+           
+        }
+
+        public virtual void OnHunterTeamBTN()
+        {
+            // With OnCLientEnterRoom, I made spawn a prefab at the waiting list
+            // Now here I want when i call this function, it will change is parent to the hunter list
+            // the issues is that we cant change a transform parent of a prefab(file corruption)
+            // so I need to change the parent of the prefab that I instantiated in the OnClientEnterRoom
+            // I need to find a way to change the parent of the prefab that I instantiated in the OnClientEnterRoom
+            
+            transform.SetParent(GameObject.Find("HunterList").transform);
+
+
+        }
 
         /// <summary>
         /// This is a hook that is invoked on clients for all room player objects when exiting the room.

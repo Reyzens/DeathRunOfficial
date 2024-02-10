@@ -1,5 +1,6 @@
 using UnityEngine;
 using Mirror;
+using Unity.VisualScripting;
 
 /*
 	Documentation: https://mirror-networking.gitbook.io/docs/components/network-room-player
@@ -14,6 +15,8 @@ using Mirror;
 /// </summary>
 public class NewNetworkRoomPlayer : NetworkRoomPlayer
 {
+    [SerializeField]
+    GameObject m_Btnprefab;
     #region Start & Stop Callbacks
 
     /// <summary>
@@ -21,7 +24,15 @@ public class NewNetworkRoomPlayer : NetworkRoomPlayer
     /// <para>This could be triggered by NetworkServer.Listen() for objects in the scene, or by NetworkServer.Spawn() for objects that are dynamically created.</para>
     /// <para>This will be called for objects on a "host" as well as for object on a dedicated server.</para>
     /// </summary>
-    public override void OnStartServer() { }
+    /// 
+
+   
+
+    public override void OnStartServer() 
+    {
+        
+
+    }
 
     /// <summary>
     /// Invoked on the server when the object is unspawned
@@ -68,7 +79,13 @@ public class NewNetworkRoomPlayer : NetworkRoomPlayer
     /// This is a hook that is invoked on all player objects when entering the room.
     /// <para>Note: isLocalPlayer is not guaranteed to be set until OnStartLocalPlayer is called.</para>
     /// </summary>
-    public override void OnClientEnterRoom() { }
+    public override void OnClientEnterRoom() 
+    {
+        Debug.Log("123");
+        Instantiate(m_Btnprefab, GameObject.Find("WaitingList").transform);
+   
+
+    }
 
     /// <summary>
     /// This is a hook that is invoked on all player objects when exiting the room.

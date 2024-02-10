@@ -1,5 +1,6 @@
 using UnityEngine;
 using Mirror;
+using TMPro;
 
 /*
 	Documentation: https://mirror-networking.gitbook.io/docs/components/network-room-manager
@@ -19,7 +20,7 @@ using Mirror;
 public class NewNetworkRoomManager : NetworkRoomManager
 {
     #region Server Callbacks
-
+    TextMeshProUGUI playerName;
     /// <summary>
     /// This is called on the server when the server is started - including when a host is started.
     /// </summary>

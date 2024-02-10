@@ -1,7 +1,7 @@
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+    using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,6 +9,7 @@ public class LobbyManager : NetworkBehaviour
 {
     [SerializeField]
     private NetworkRoomManager m_networkManagerRef;
+    
 
     [SerializeField]
     private GameObject m_startMenu;
@@ -18,14 +19,11 @@ public class LobbyManager : NetworkBehaviour
     private GameObject m_multiplayerLobby;
 
     [SerializeField]
-    private TextMeshProUGUI m_playerName;
+    public TextMeshProUGUI m_playerName;
     [SerializeField]
     private TextMeshProUGUI m_IpAdress;
     
-    [SerializeField]
-    private GameObject m_UIPlayerName;
-    [SerializeField]
-    private GameObject m_UIPlayerNameAnchor;
+    
 
     string m_userName;
     string m_LobbyIp;
@@ -63,20 +61,22 @@ public class LobbyManager : NetworkBehaviour
         m_startMenu.SetActive(false);
         m_lobbySelection.SetActive(false);
         m_multiplayerLobby.SetActive(true);
-        
-        if(isClient)
-        {
-            InstantiateUserName();
-        }
        
     }
 
+    public void JoinHunterTeamBTN()
+    {
+        Debug.Log("Hunter Team BTN");
+        
+        m_networkManagerRef.roomPlayerPrefab.OnHunterTeamBTN();
+    }
 
     
 
     public void PlayerUserName()
     { 
         m_userName = m_playerName.text;
+        
         Debug.Log(m_userName);
     }
     public void PlayerIp()
@@ -99,18 +99,5 @@ public class LobbyManager : NetworkBehaviour
         GoToMultiplayerLobby();       
     }
     
-    [Command(requiresAuthority = false)]
-    private void InstantiateUserName()
-    {
-        CreateUserName(m_userName);
-        Debug.Log(m_userName);
-    }
-
-    [ClientRpc]
-    private void CreateUserName(string username)
-    {
-        m_UIPlayerName.GetComponent<TextMeshProUGUI>().text = username;
-        Debug.Log(username);
-        Instantiate(m_UIPlayerName, m_UIPlayerNameAnchor.transform);
-    }
+    
 }

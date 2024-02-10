@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
+
 
 namespace Mirror
 {
@@ -17,7 +19,7 @@ namespace Mirror
     public class NetworkManager : MonoBehaviour
     {
         [SerializeField]
-        public bool M_baba;
+        GameObject waitingContent;
         /// <summary>Enable to keep NetworkManager alive when changing scenes.</summary>
         // This should be set if your game has a single NetworkManager that exists for the lifetime of the process. If there is a NetworkManager in each scene, then this should not be set.</para>
         [Header("Configuration")]
@@ -1390,11 +1392,17 @@ namespace Mirror
         {
             Transform startPos = GetStartPosition();
             GameObject player = startPos != null
-                ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+                ? Instantiate(playerPrefab, waitingContent.transform)
                 : Instantiate(playerPrefab);
 
+            
             // instantiating a "Player" prefab gives it the name "Player(clone)"
             // => appending the connectionId is WAY more useful for debugging!
+
+            
+           
+            
+            
             player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
             NetworkServer.AddPlayerForConnection(conn, player);
         }
