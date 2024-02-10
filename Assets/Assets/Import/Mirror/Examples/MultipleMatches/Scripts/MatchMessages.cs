@@ -31,6 +31,7 @@ namespace Mirror.Examples.MultipleMatch
         public Guid matchId;
         public byte players;
         public byte maxPlayers;
+        public int maxPLayersPerTeam;
     }
 
     /// <summary>
@@ -42,6 +43,7 @@ namespace Mirror.Examples.MultipleMatch
         public int playerIndex;
         public bool ready;
         public Guid matchId;
+        public int playerTeam;
     }
 
     [Serializable]
