@@ -8,17 +8,20 @@ using UnityEngine;
 public class LobbyManager : NetworkBehaviour
 {
     [SerializeField]
+    private NetworkRoomManager m_networkManagerRef;
+
+    [SerializeField]
     private GameObject m_startMenu;
     [SerializeField]
     private GameObject m_lobbySelection;
     [SerializeField]
+    private GameObject m_multiplayerLobby;
+
+    [SerializeField]
     private TextMeshProUGUI m_playerName;
     [SerializeField]
     private TextMeshProUGUI m_IpAdress;
-    [SerializeField]
-    private GameObject m_teamSelection;
-    [SerializeField]
-    private NetworkRoomManager m_networkManagerRef;
+    
     [SerializeField]
     private GameObject m_UIPlayerName;
     [SerializeField]
@@ -42,18 +45,24 @@ public class LobbyManager : NetworkBehaviour
 
     }
 
+    public void GoToStart()
+    {
+        m_startMenu.SetActive(true);
+        m_lobbySelection.SetActive(false);
+        m_multiplayerLobby.SetActive(false);
+    }
     public void GoToLobbySelection()
     {
         m_startMenu.SetActive(false);
         m_lobbySelection.SetActive(true);
-        m_teamSelection.SetActive(false);
+        m_multiplayerLobby.SetActive(false);
     }
 
-    public void GoToTeamSelection()
+    public void GoToMultiplayerLobby()
     {
         m_startMenu.SetActive(false);
         m_lobbySelection.SetActive(false);
-        m_teamSelection.SetActive(true);
+        m_multiplayerLobby.SetActive(true);
         
         if(isClient)
         {
@@ -63,12 +72,7 @@ public class LobbyManager : NetworkBehaviour
     }
 
 
-    public void GoToStart()
-    {
-        m_startMenu.SetActive(true);
-        m_lobbySelection.SetActive(false);
-        m_teamSelection.SetActive(false);
-    }
+    
 
     public void PlayerUserName()
     { 
@@ -83,7 +87,7 @@ public class LobbyManager : NetworkBehaviour
     public void HostGame()
     {
         m_networkManagerRef.StartHost();
-        GoToTeamSelection();
+        GoToMultiplayerLobby();
 
     }
 
@@ -92,7 +96,7 @@ public class LobbyManager : NetworkBehaviour
         m_startMenu.SetActive(false);
         m_networkManagerRef.StartClient();
         m_networkManagerRef.networkAddress = m_LobbyIp;
-        GoToTeamSelection();       
+        GoToMultiplayerLobby();       
     }
     
     [Command(requiresAuthority = false)]
