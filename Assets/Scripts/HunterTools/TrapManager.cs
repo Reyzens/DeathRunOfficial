@@ -32,17 +32,6 @@ public class TrapManager : NetworkBehaviour
     private TrapDoorController m_trapDoorEigth;
     [SerializeField]
     private List<MovingPlatform> m_movingPlatformSerieOne = new List<MovingPlatform>();
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void OnFTSet1()
     {
@@ -102,57 +91,87 @@ public class TrapManager : NetworkBehaviour
 
     public void OnDoor1()
     {
-        m_trapDoorOne.CommandActivatedEffect();
+        if (isClient)
+        {
+            m_trapDoorOne.CommandActivatedEffect();
+        }
     }
 
     public void OnDoor2()
     {
-        m_trapDoorTwo.CommandActivatedEffect();
+        if (isClient)
+        {
+            m_trapDoorTwo.CommandActivatedEffect();
+        }
     }
 
     public void OnDoor3()
     {
-        m_trapDoorThree.CommandActivatedEffect();
+        if (isClient)
+        {
+            m_trapDoorThree.CommandActivatedEffect();
+        }
     }
 
     public void OnDoor4()
     {
-        m_trapDoorFour.CommandActivatedEffect();
+        if (isClient)
+        {
+            m_trapDoorFour.CommandActivatedEffect();
+        }
     }
 
     public void OnDoor5()
     {
-        m_trapDoorFive.CommandActivatedEffect();
+        if (isClient)
+        {
+            m_trapDoorFive.CommandActivatedEffect();
+        }
     }
 
     public void OnDoor6()
     {
-        m_trapDoorSix.CommandActivatedEffect();
+        if (isClient)
+        {
+            m_trapDoorSix.CommandActivatedEffect();
+        }
     }
 
     public void OnDoor7()
     {
-        m_trapDoorSeven.CommandActivatedEffect();
+        if (isClient)
+        {
+            m_trapDoorSeven.CommandActivatedEffect();
+        }
     }
 
     public void OnDoor8()
     {
-        m_trapDoorEigth.CommandActivatedEffect();
+        if (isClient)
+        {
+            m_trapDoorEigth.CommandActivatedEffect();
+        }
     }
 
     public void InverseMovingPlatform()
     {
-        foreach (MovingPlatform movingPlatform in m_movingPlatformSerieOne)
+        if (isClient)
         {
-            movingPlatform.CommandReverseActivation();
+            foreach (MovingPlatform movingPlatform in m_movingPlatformSerieOne)
+            {
+                movingPlatform.CommandReverseActivation();
+            }
         }
     }
 
     public void AccelerateMovingPlatform()
     {
-        foreach (MovingPlatform movingPlatform in m_movingPlatformSerieOne)
+        if (isClient)
         {
-            movingPlatform.CommandAccelerateActivation();
+            foreach (MovingPlatform movingPlatform in m_movingPlatformSerieOne)
+            {
+                movingPlatform.CommandAccelerateActivation();
+            }
         }
     }
 }
