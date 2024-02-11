@@ -31,7 +31,7 @@ public class TrapManager : NetworkBehaviour
     [SerializeField]
     private TrapDoorController m_trapDoorEigth;
     [SerializeField]
-    private List<TrapDoorController> m_TrapDoorSerieTwo = new List<TrapDoorController>();
+    private List<MovingPlatform> m_movingPlatformSerieOne = new List<MovingPlatform>();
     // Start is called before the first frame update
     void Start()
     {
@@ -138,5 +138,13 @@ public class TrapManager : NetworkBehaviour
     public void OnDoor8()
     {
         m_trapDoorEigth.CommandActivatedEffect();
+    }
+
+    public void InverseMovingPlatform()
+    {
+        foreach (MovingPlatform movingPlatform in m_movingPlatformSerieOne)
+        {
+            movingPlatform.CommandReverseActivation();
+        }
     }
 }

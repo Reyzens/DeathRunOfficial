@@ -1,16 +1,22 @@
+using Mirror;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingPlatform : NetworkBehaviour
 {
     [SerializeField]
     public List<Transform> movingCoordinate;
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private float accelerationDuration;
+    [SerializeField]
+    private float speedMultiplier;
 
     private int coordinateIndex;
     private int lastCoordinateIndex;
     private bool isInReverse;
+    private float currentAccelerationTime = 0;
 
     const float TRANSFORM_MARGIN = 0.001f;
 
@@ -29,17 +35,9 @@ public class MovingPlatform : MonoBehaviour
         //Debug.Log("Update platform");
         UpdatePosition();
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Platform position " + transform.position);
-            Debug.Log("Platform locaposition " + transform.localPosition);
-            Debug.Log("Moving position " + movingCoordinate[coordinateIndex].position);
-            Debug.Log("moving localposition " + movingCoordinate[coordinateIndex].localPosition);
-        }
-
         if (Vector3.Distance(transform.position, movingCoordinate[coordinateIndex].position) < TRANSFORM_MARGIN)
         {
-            Debug.Log("Reached destination");
+            //Debug.Log("Reached destination");
             if (!isInReverse)
             {
                 if (coordinateIndex != lastCoordinateIndex)
@@ -77,7 +75,32 @@ public class MovingPlatform : MonoBehaviour
 
     private void UpdatePosition()
     {
-        //transform.position = Vector3.MoveTowards(transform.position, nextCoordinate, speed * Time.deltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, movingCoordinate[coordinateIndex].position, speed * Time.deltaTime);
+        currentAccelerationTime -= Time.deltaTime;
+        if (currentAccelerationTime < 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, movingCoordinate[coordinateIndex].position, speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, movingCoordinate[coordinateIndex].position, speed * speedMultiplier * Time.deltaTime);
+        }
+    }
+
+    [ClientRpc]
+    private void Accelerate()
+    {
+        currentAccelerationTime = accelerationDuration;
+    }
+
+    [ClientRpc]
+    private void Reverse()
+    {
+        isInReverse = !isInReverse;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CommandReverseActivation()
+    {
+        Reverse();
     }
 }
