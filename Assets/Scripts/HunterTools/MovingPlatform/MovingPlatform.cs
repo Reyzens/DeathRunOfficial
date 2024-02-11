@@ -38,37 +38,7 @@ public class MovingPlatform : NetworkBehaviour
         if (Vector3.Distance(transform.position, movingCoordinate[coordinateIndex].position) < TRANSFORM_MARGIN)
         {
             //Debug.Log("Reached destination");
-            if (!isInReverse)
-            {
-                if (coordinateIndex != lastCoordinateIndex)
-                {
-                    //Debug.Log("Go up one coordinate");
-                    coordinateIndex++;
-                }
-                else
-                {
-                    //Go back to first index coordinate
-                    //Debug.Log("Return to origine");
-                    coordinateIndex = 0;
-                }
-                return;
-            }
-
-            if (isInReverse)
-            {
-                //Check if at first index coordinate
-                if (coordinateIndex != 0)
-                {
-                    //Debug.Log("Go down one coordinate");
-                    coordinateIndex--;
-                }
-                else
-                {
-                    //Go back to last index coordinate
-                    //Debug.Log("Reset coordinate order");
-                    coordinateIndex = lastCoordinateIndex;
-                }
-            }
+            ChangeCoordinate();
             Debug.Log(coordinateIndex);
         }
     }
@@ -96,11 +66,47 @@ public class MovingPlatform : NetworkBehaviour
     private void Reverse()
     {
         isInReverse = !isInReverse;
+        ChangeCoordinate();
     }
 
     [Command(requiresAuthority = false)]
     public void CommandReverseActivation()
     {
         Reverse();
+    }
+
+    private void ChangeCoordinate()
+    {
+        if (!isInReverse)
+        {
+            if (coordinateIndex != lastCoordinateIndex)
+            {
+                //Debug.Log("Go up one coordinate");
+                coordinateIndex++;
+            }
+            else
+            {
+                //Go back to first index coordinate
+                //Debug.Log("Return to origine");
+                coordinateIndex = 0;
+            }
+            return;
+        }
+
+        if (isInReverse)
+        {
+            //Check if at first index coordinate
+            if (coordinateIndex != 0)
+            {
+                //Debug.Log("Go down one coordinate");
+                coordinateIndex--;
+            }
+            else
+            {
+                //Go back to last index coordinate
+                //Debug.Log("Reset coordinate order");
+                coordinateIndex = lastCoordinateIndex;
+            }
+        }
     }
 }
