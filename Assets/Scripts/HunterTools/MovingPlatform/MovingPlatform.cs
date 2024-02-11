@@ -8,7 +8,6 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField]
     private float speed;
 
-    private Transform initialPosition;
     private int coordinateIndex;
     private int lastCoordinateIndex;
     private bool isInReverse;
@@ -18,9 +17,9 @@ public class MovingPlatform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Start at first coordinate since index 0 is initial position
         coordinateIndex = 1;
         isInReverse = false;
-        movingCoordinate.Insert(0, initialPosition);
         lastCoordinateIndex = movingCoordinate.Count - 1;
         //Debug.Log(movingCoordinate[0].position);
     }
@@ -50,66 +49,30 @@ public class MovingPlatform : MonoBehaviour
                 }
                 else
                 {
+                    //Go back to first index coordinate
                     //Debug.Log("Return to origine");
-                    isInReverse = true;
-                    coordinateIndex--;
+                    coordinateIndex = 0;
                 }
                 return;
             }
 
             if (isInReverse)
             {
-                if (coordinateIndex > 0)
+                //Check if at first index coordinate
+                if (coordinateIndex != 0)
                 {
                     //Debug.Log("Go down one coordinate");
                     coordinateIndex--;
                 }
                 else
                 {
+                    //Go back to last index coordinate
                     //Debug.Log("Reset coordinate order");
-                    isInReverse = false;
-                    coordinateIndex = 1;
+                    coordinateIndex = lastCoordinateIndex;
                 }
             }
             Debug.Log(coordinateIndex);
         }
-
-        //if (transform.position == nextCoordinate)
-        //{
-        //    if (!isInReverse)
-        //    {
-        //        if (coordinateIndex != lastCoordinateIndex)
-        //        {
-        //            coordinateIndex++;
-        //            nextCoordinate = movingCoordinate[coordinateIndex].position;
-        //        }
-        //        else
-        //        {
-        //            isInReverse = true;
-        //            coordinateIndex--;
-        //            nextCoordinate = movingCoordinate[coordinateIndex].position;
-        //        }
-        //    }
-
-        //    if (isInReverse)
-        //    {
-        //        if (nextCoordinate == movingCoordinate[0].position)
-        //        {
-        //            nextCoordinate = initialPosition.position;
-        //        }
-        //        else if (nextCoordinate != initialPosition.position)
-        //        {
-        //            coordinateIndex--;
-        //            nextCoordinate = movingCoordinate[coordinateIndex].position;
-        //        }
-        //        else
-        //        {
-        //            isInReverse = false;
-        //            coordinateIndex = 0;
-        //            nextCoordinate = movingCoordinate[coordinateIndex].position;
-        //        }
-        //    }
-        //}
     }
 
     private void UpdatePosition()
