@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1316126445445143388}
   - component: {fileID: 6910376215845441547}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Door4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1347741833599376178}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3298682320539274942}
+        m_TargetAssemblyTypeName: TrapManager, Assembly-CSharp
+        m_MethodName: OnDoor4
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6910376215845441547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +219,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Door 1
+  m_text: Door 7
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -475,7 +487,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Door 1
+  m_text: Door 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -817,7 +829,7 @@ GameObject:
   - component: {fileID: 36477541805382499}
   - component: {fileID: 3604709444125707370}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Door7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -924,7 +936,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 119136019662756468}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3298682320539274942}
+        m_TargetAssemblyTypeName: TrapManager, Assembly-CSharp
+        m_MethodName: OnDoor7
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3604709444125707370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,7 +1541,7 @@ GameObject:
   - component: {fileID: 3363571073401868642}
   - component: {fileID: 383267867559097440}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Door3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1624,7 +1648,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5055216927488141603}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3298682320539274942}
+        m_TargetAssemblyTypeName: TrapManager, Assembly-CSharp
+        m_MethodName: OnDoor3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &383267867559097440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1710,7 +1746,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Door 1
+  m_text: Door 8
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1844,7 +1880,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Door 1
+  m_text: Door 6
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1927,7 +1963,7 @@ GameObject:
   - component: {fileID: 646461680448852083}
   - component: {fileID: 3439810570012635805}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: TrapDoorPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2604,7 +2640,7 @@ GameObject:
   - component: {fileID: 7987522500262579346}
   - component: {fileID: 581619314114218002}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Door5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2711,7 +2747,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8873103019901912227}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3298682320539274942}
+        m_TargetAssemblyTypeName: TrapManager, Assembly-CSharp
+        m_MethodName: OnDoor5
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &581619314114218002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2797,7 +2845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Door 1
+  m_text: Door 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3168,7 +3216,7 @@ GameObject:
   - component: {fileID: 1609736982191134908}
   - component: {fileID: 7372144866791470188}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Door1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3276,13 +3324,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 3298682320539274942}
+        m_TargetAssemblyTypeName: TrapManager, Assembly-CSharp
+        m_MethodName: OnDoor1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3322,7 +3370,7 @@ GameObject:
   - component: {fileID: 4115290002915186246}
   - component: {fileID: 8794149742699493940}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Door8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3429,7 +3477,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7108197274887865832}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3298682320539274942}
+        m_TargetAssemblyTypeName: TrapManager, Assembly-CSharp
+        m_MethodName: OnDoor8
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8794149742699493940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3649,7 +3709,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Door 1
+  m_text: Door 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4000,7 +4060,7 @@ GameObject:
   - component: {fileID: 9128314507588459519}
   - component: {fileID: 8323177831195659373}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Door6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4107,7 +4167,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4319448904364974652}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3298682320539274942}
+        m_TargetAssemblyTypeName: TrapManager, Assembly-CSharp
+        m_MethodName: OnDoor6
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8323177831195659373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4320,7 +4392,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Door 1
+  m_text: Door 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4734,7 +4806,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  m_trapDoorSerieOne: []
+  m_trapDoorOne: {fileID: 0}
+  m_trapDoorTwo: {fileID: 0}
+  m_trapDoorThree: {fileID: 0}
+  m_trapDoorFour: {fileID: 0}
+  m_trapDoorFive: {fileID: 0}
+  m_trapDoorSix: {fileID: 0}
+  m_trapDoorSeven: {fileID: 0}
+  m_trapDoorEigth: {fileID: 0}
   m_TrapDoorSerieTwo: []
 --- !u!114 &7070295927806559801
 MonoBehaviour:
@@ -4901,7 +4980,7 @@ GameObject:
   - component: {fileID: 8231582461158473713}
   - component: {fileID: 4518891557236794632}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Door2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5008,7 +5087,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4789733156135215705}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3298682320539274942}
+        m_TargetAssemblyTypeName: TrapManager, Assembly-CSharp
+        m_MethodName: OnDoor2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4518891557236794632
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,6 +17,20 @@ public class TrapManager : NetworkBehaviour
     [SerializeField]
     private TrapDoorController m_trapDoorOne;
     [SerializeField]
+    private TrapDoorController m_trapDoorTwo;
+    [SerializeField]
+    private TrapDoorController m_trapDoorThree;
+    [SerializeField]
+    private TrapDoorController m_trapDoorFour;
+    [SerializeField]
+    private TrapDoorController m_trapDoorFive;
+    [SerializeField]
+    private TrapDoorController m_trapDoorSix;
+    [SerializeField]
+    private TrapDoorController m_trapDoorSeven;
+    [SerializeField]
+    private TrapDoorController m_trapDoorEigth;
+    [SerializeField]
     private List<TrapDoorController> m_TrapDoorSerieTwo = new List<TrapDoorController>();
     // Start is called before the first frame update
     void Start()
@@ -89,5 +103,40 @@ public class TrapManager : NetworkBehaviour
     public void OnDoor1()
     {
         m_trapDoorOne.CommandActivatedEffect();
+    }
+
+    public void OnDoor2()
+    {
+        m_trapDoorTwo.CommandActivatedEffect();
+    }
+
+    public void OnDoor3()
+    {
+        m_trapDoorThree.CommandActivatedEffect();
+    }
+
+    public void OnDoor4()
+    {
+        m_trapDoorFour.CommandActivatedEffect();
+    }
+
+    public void OnDoor5()
+    {
+        m_trapDoorFive.CommandActivatedEffect();
+    }
+
+    public void OnDoor6()
+    {
+        m_trapDoorSix.CommandActivatedEffect();
+    }
+
+    public void OnDoor7()
+    {
+        m_trapDoorSeven.CommandActivatedEffect();
+    }
+
+    public void OnDoor8()
+    {
+        m_trapDoorEigth.CommandActivatedEffect();
     }
 }
