@@ -39,7 +39,7 @@ public class MovingPlatform : NetworkBehaviour
         {
             //Debug.Log("Reached destination");
             ChangeCoordinate();
-            Debug.Log(coordinateIndex);
+            //Debug.Log(coordinateIndex);
         }
     }
 
@@ -73,6 +73,12 @@ public class MovingPlatform : NetworkBehaviour
     public void CommandReverseActivation()
     {
         Reverse();
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CommandAccelerateActivation()
+    {
+        Accelerate();
     }
 
     private void ChangeCoordinate()

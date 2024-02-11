@@ -147,4 +147,12 @@ public class TrapManager : NetworkBehaviour
             movingPlatform.CommandReverseActivation();
         }
     }
+
+    public void AccelerateMovingPlatform()
+    {
+        foreach (MovingPlatform movingPlatform in m_movingPlatformSerieOne)
+        {
+            movingPlatform.CommandAccelerateActivation();
+        }
+    }
 }
