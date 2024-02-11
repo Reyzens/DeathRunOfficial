@@ -4,12 +4,11 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     [SerializeField]
-    private Transform initialPosition;
-    [SerializeField]
     public List<Transform> movingCoordinate;
     [SerializeField]
     private float speed;
 
+    private Transform initialPosition;
     private int coordinateIndex;
     private int lastCoordinateIndex;
     private bool isInReverse;
