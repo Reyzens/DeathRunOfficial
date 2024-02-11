@@ -42,6 +42,7 @@ public class FlamethrowerActivation : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CommandActivatedEffect()
     {
+
         ActivateClientFlamethrower(NetworkTime.time);
         //ActivateClientFlamethrower(Time.timeAsDouble);
     }
