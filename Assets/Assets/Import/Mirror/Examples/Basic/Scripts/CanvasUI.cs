@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Mirror.Examples.Basic
 {
@@ -10,6 +11,16 @@ namespace Mirror.Examples.Basic
         [Tooltip("Assign Players Panel for instantiating PlayerUI as child")]
         public RectTransform playersPanel;
 
+        public RectTransform HunterPanel;
+        public RectTransform RunnerPanel;
+        public RectTransform WaitingPanel;
+
+        public Button JoinHunterButton;
+        public Button JoinRunnerButton;
+        public Button JoinWaintingButton;
+        public Button StartButton;
+        public Button ReadyButton;
+
         // static instance that can be referenced from static methods below.
         static CanvasUI instance;
 
@@ -20,9 +31,9 @@ namespace Mirror.Examples.Basic
 
         public static void SetActive(bool active)
         {
-            instance.mainPanel.gameObject.SetActive(active);
+            instance.WaitingPanel.gameObject.SetActive(active);
         }
 
-        public static RectTransform GetPlayersPanel() => instance.playersPanel;
+        public static RectTransform GetPlayersPanel() => instance.WaitingPanel;
     }
 }

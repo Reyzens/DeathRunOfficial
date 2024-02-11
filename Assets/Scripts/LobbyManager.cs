@@ -63,15 +63,26 @@ public class LobbyManager : NetworkBehaviour
         m_multiplayerLobby.SetActive(true);
        
     }
+    public void PlayerIsReadyBTN()
+    {
+        m_networkManagerRef.roomPlayerPrefab.CmdChangeReadyState(true);
+
+    }
 
     public void JoinHunterTeamBTN()
     {
-        Debug.Log("Hunter Team BTN");
-        
         m_networkManagerRef.roomPlayerPrefab.OnHunterTeamBTN();
     }
+    public void JoinRunnerTeamBTN()
+    {
+        m_networkManagerRef.roomPlayerPrefab.OnRunnerTeamBTN();
+    }
+    public void JoinWaitingTeamBTN()
+    {
+        m_networkManagerRef.roomPlayerPrefab.OnWaitingTeamBTN();
+    }
 
-    
+
 
     public void PlayerUserName()
     { 

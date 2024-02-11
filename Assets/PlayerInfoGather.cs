@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerInfoGather : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    public GameObject m_playerInfoUI;
+    [SerializeField]
+    public enum Playerteam
     {
-        
+        Hunter,
+        Runner,
+        Waiting
     }
+    [SerializeField]
+    private Playerteam m_playerTeam;
+    [SerializeField]
+    private string m_userName;
+    [SerializeField]
+    private bool m_isReady;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

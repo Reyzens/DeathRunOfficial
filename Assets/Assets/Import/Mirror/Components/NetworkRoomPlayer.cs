@@ -14,6 +14,7 @@ namespace Mirror
         [SerializeField]
         GameObject m_Btnprefab;
         
+        
 
         [SerializeField]
         string m_userName;
@@ -129,8 +130,24 @@ namespace Mirror
         /// </summary>
         public virtual void OnClientEnterRoom() 
         {
-            Instantiate(m_Btnprefab, GameObject.Find("WaitingList").transform);
-           
+            InstantiatePlayerBTN();
+        }
+
+        [Command(requiresAuthority = false)]
+
+        private void InstantiatePlayerBTN()
+        {
+            RpcInstantiatePlayerBTN();
+        }
+
+        [ClientRpc]
+        public void RpcInstantiatePlayerBTN()
+        {
+            if (isLocalPlayer)
+            {
+                GameObject m_test = Instantiate(m_Btnprefab, GameObject.Find("WaitingList").transform);
+                m_test.name = "PlayerBTN";
+            }
         }
 
         public virtual void OnHunterTeamBTN()
@@ -140,10 +157,16 @@ namespace Mirror
             // the issues is that we cant change a transform parent of a prefab(file corruption)
             // so I need to change the parent of the prefab that I instantiated in the OnClientEnterRoom
             // I need to find a way to change the parent of the prefab that I instantiated in the OnClientEnterRoom
-            
-            transform.SetParent(GameObject.Find("HunterList").transform);
-
-
+                
+            GameObject.Find("PlayerBTN").transform.SetParent(GameObject.Find("HunterList").transform,false);
+        }
+        public virtual void OnRunnerTeamBTN()
+        {
+            GameObject.Find("PlayerBTN").transform.SetParent(GameObject.Find("RunnerList").transform, false);
+        }
+        public virtual void OnWaitingTeamBTN()
+        {
+            GameObject.Find("PlayerBTN").transform.SetParent(GameObject.Find("WaitingList").transform, false);
         }
 
         /// <summary>
