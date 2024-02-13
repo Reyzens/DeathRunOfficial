@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Mirror.Examples.MultipleMatch;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,14 @@ namespace Mirror.Examples.Basic
 
         [Header("Child Text Objects")]
         public TextMeshProUGUI m_playerUserName;
+
+        public PlayerInfo m_playerInfo;
+
+        public void SetPlayerInfo(ref PlayerInfo LocalplayerInfo)
+        { 
+            m_playerInfo = LocalplayerInfo; 
         
+        }
         // Sets a highlight color for the local player
         public void SetLocalPlayer()
         {
