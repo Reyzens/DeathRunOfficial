@@ -17,6 +17,8 @@ namespace Mirror
         GameObject m_lobbyUI;
         [SerializeField]
         MonoBehaviour m_infoGathering;
+        [SerializeField]
+        MonoBehaviour m_lobbyLinker;
 
         /// <summary>
         /// This flag controls whether the default UI is shown for the room player.
@@ -85,7 +87,8 @@ namespace Mirror
 
         #region Commands
 
-        [Command]
+        //CHANGEMENT PO de [Command] a
+        [Command(requiresAuthority = false)]
         public void CmdChangeReadyState(bool readyState)
         {
             readyToBegin = readyState;
