@@ -19,8 +19,11 @@ public class LobbyLinker : MonoBehaviour
         lobby = GameObject.Find("LobbyManager").GetComponent<LobbymanagerSimplePO>();
         player = GetComponent<NetworkRoomPlayer>();
 
-        lobby.SetPlayer(ref player);
-        lobby.SetLobbyLinker(gameObject.GetComponent<LobbyLinker>());
+        if (player.isLocalPlayer)
+        {
+            lobby.SetPlayer(ref player);
+            lobby.SetLobbyLinker(gameObject.GetComponent<LobbyLinker>());
+        }
     }
 
     // Update is called once per frame
@@ -41,6 +44,6 @@ public class LobbyLinker : MonoBehaviour
 
     public void SetRole(GameObject role)
     {
-        selectedRole = role;
+        selectedRole = Instantiate(role, transform);
     }
 }

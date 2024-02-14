@@ -2,7 +2,7 @@ using Mirror;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbymanagerSimplePO : NetworkBehaviour
+public class LobbymanagerSimplePO : MonoBehaviour
 {
     [SerializeField]
     NetworkRoomManager manager;
@@ -52,14 +52,14 @@ public class LobbymanagerSimplePO : NetworkBehaviour
 
     public void SetPlayer(ref NetworkRoomPlayer newPlayer)
     {
-        playerList.Add(newPlayer);
-        //player = newPlayer;
+        //playerList.Add(newPlayer);
+        player = newPlayer;
     }
 
     public void SetLobbyLinker(LobbyLinker linker)
     {
-        lobbyLinkerList.Add(linker);
-        //lobbyLinker = linker;
+        //lobbyLinkerList.Add(linker);
+        lobbyLinker = linker;
     }
     public void OnReadyClick()
     {
@@ -88,8 +88,8 @@ public class LobbymanagerSimplePO : NetworkBehaviour
 
     public void OnHunterClick()
     {
-        //lobbyLinker.OnTeamSelection(ETeam.Hunter);
-        //readyPanel.SetActive(true);
+        lobbyLinker.OnTeamSelection(ETeam.Hunter);
+        readyPanel.SetActive(true);
     }
 
     public void OnChoosingClick()
