@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 
 namespace Mirror
@@ -18,8 +17,6 @@ namespace Mirror
     [HelpURL("https://mirror-networking.gitbook.io/docs/components/network-manager")]
     public class NetworkManager : MonoBehaviour
     {
-        [SerializeField]
-        GameObject waitingContent;
         /// <summary>Enable to keep NetworkManager alive when changing scenes.</summary>
         // This should be set if your game has a single NetworkManager that exists for the lifetime of the process. If there is a NetworkManager in each scene, then this should not be set.</para>
         [Header("Configuration")]
@@ -323,7 +320,7 @@ namespace Mirror
         // full server setup code, without spawning objects yet
         void SetupServer()
         {
-            // Debug.Log("NetworkManager SetupServer");
+            Debug.Log("NetworkManager SetupServer");
             InitializeSingleton();
 
             // apply settings before initializing anything
@@ -484,6 +481,7 @@ namespace Mirror
         /// <summary>Starts a network "host" - a server and client in the same application.</summary>
         public void StartHost()
         {
+            Debug.Log("Enter starthost");
             if (NetworkServer.active || NetworkClient.active)
             {
                 Debug.LogWarning("Server or Client already started.");
@@ -801,7 +799,7 @@ namespace Mirror
 
             if (playerPrefab != null)
                 NetworkClient.RegisterPrefab(playerPrefab);
-                    if (playerRunner  != null)
+            if (playerRunner != null)
                 NetworkClient.RegisterPrefab(playerPrefab);
 
             foreach (GameObject prefab in spawnPrefabs.Where(t => t != null))
@@ -1392,17 +1390,17 @@ namespace Mirror
         {
             Transform startPos = GetStartPosition();
             GameObject player = startPos != null
-                ? Instantiate(playerPrefab, waitingContent.transform)
+                ? Instantiate(playerPrefab)
                 : Instantiate(playerPrefab);
 
-            
+
             // instantiating a "Player" prefab gives it the name "Player(clone)"
             // => appending the connectionId is WAY more useful for debugging!
 
-            
-           
-            
-            
+
+
+
+
             player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
             NetworkServer.AddPlayerForConnection(conn, player);
         }

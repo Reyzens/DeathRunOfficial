@@ -15,7 +15,8 @@ namespace Mirror
         GameObject m_Btnprefab;
         [SerializeField]
         GameObject m_lobbyUI;
-
+        [SerializeField]
+        MonoBehaviour m_infoGathering;
 
         /// <summary>
         /// This flag controls whether the default UI is shown for the room player.
@@ -104,14 +105,14 @@ namespace Mirror
         /// </summary>
         /// <param name="oldIndex">The old index value</param>
         /// <param name="newIndex">The new index value</param>
-        public virtual void IndexChanged(int oldIndex, int newIndex) {}
+        public virtual void IndexChanged(int oldIndex, int newIndex) { }
 
         /// <summary>
         /// This is a hook that is invoked on clients when a RoomPlayer switches between ready or not ready.
         /// <para>This function is called when the a client player calls CmdChangeReadyState.</para>
         /// </summary>
         /// <param name="newReadyState">New Ready State</param>
-        public virtual void ReadyStateChanged(bool oldReadyState, bool newReadyState) {}
+        public virtual void ReadyStateChanged(bool oldReadyState, bool newReadyState) { }
 
         #endregion
 
@@ -121,14 +122,14 @@ namespace Mirror
         /// This is a hook that is invoked on clients for all room player objects when entering the room.
         /// <para>Note: isLocalPlayer is not guaranteed to be set until OnStartLocalPlayer is called.</para>
         /// </summary>
-        public virtual void OnClientEnterRoom() 
+        public virtual void OnClientEnterRoom()
         {
-            
+
         }
 
-        public override void OnStartLocalPlayer() 
+        public override void OnStartLocalPlayer()
         {
-            
+
         }
 
         public virtual void OnHunterTeamBTN()
@@ -138,8 +139,8 @@ namespace Mirror
             // the issues is that we cant change a transform parent of a prefab(file corruption)
             // so I need to change the parent of the prefab that I instantiated in the OnClientEnterRoom
             // I need to find a way to change the parent of the prefab that I instantiated in the OnClientEnterRoom
-                
-            GameObject.Find("PlayerBTN").transform.SetParent(GameObject.Find("HunterList").transform,false);
+
+            GameObject.Find("PlayerBTN").transform.SetParent(GameObject.Find("HunterList").transform, false);
         }
         public virtual void OnRunnerTeamBTN()
         {
@@ -153,7 +154,7 @@ namespace Mirror
         /// <summary>
         /// This is a hook that is invoked on clients for all room player objects when exiting the room.
         /// </summary>
-        public virtual void OnClientExitRoom() {}
+        public virtual void OnClientExitRoom() { }
 
         #endregion
 

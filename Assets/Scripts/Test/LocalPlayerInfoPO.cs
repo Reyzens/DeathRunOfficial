@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class LocalPlayerInfo : MonoBehaviour
+public class LocalPlayerInfoPO : MonoBehaviour
 {
 
     public enum playerTeam
@@ -21,12 +21,6 @@ public class LocalPlayerInfo : MonoBehaviour
     private TextMeshProUGUI m_playerNameText;
 
 
-
-    void Start()
-    {
-        m_playerName = GameObject.Find("LobbyManager").GetComponent<LobbyManager>().m_playerName.text;
-    }
-
     public void SetUserName()
     {
         m_playerName = m_playerNameText.text;
@@ -41,7 +35,6 @@ public class LocalPlayerInfo : MonoBehaviour
     {
         m_ButtonIsReady = isReady;
     }
-
     public string GetLocalUsername()
     {
         return m_playerName;
