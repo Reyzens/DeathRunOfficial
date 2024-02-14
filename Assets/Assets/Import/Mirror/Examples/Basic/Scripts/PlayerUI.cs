@@ -13,13 +13,13 @@ namespace Mirror.Examples.Basic
         [Header("Child Text Objects")]
         public TextMeshProUGUI m_playerUserName;
 
-        public PlayerInfo m_playerInfo;
+        public MonoBehaviour m_playerInfoScript;
 
-        public void SetPlayerInfo(ref PlayerInfo LocalplayerInfo)
-        { 
-            m_playerInfo = LocalplayerInfo; 
-        
+        private void Start()
+        {
+            
         }
+        
         // Sets a highlight color for the local player
         public void SetLocalPlayer()
         {

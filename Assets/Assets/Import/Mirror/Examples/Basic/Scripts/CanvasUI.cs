@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Mirror.Examples.Basic
@@ -20,6 +21,10 @@ namespace Mirror.Examples.Basic
         public Button JoinWaintingButton;
         public Button StartButton;
         public Button ReadyButton;
+
+        public List<PlayerUI> HunterList = new List<PlayerUI>();
+        public List<PlayerUI> RunnerList = new List<PlayerUI>();
+        public List<PlayerUI> WaitingList = new List<PlayerUI>();
 
         // static instance that can be referenced from static methods below.
         static CanvasUI instance;

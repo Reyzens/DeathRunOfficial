@@ -13,17 +13,9 @@ namespace Mirror
     {
         [SerializeField]
         GameObject m_Btnprefab;
-        
-        
-
         [SerializeField]
-        string m_userName;
-        
-        enum Playerteam
-        {
-            Hunter,
-            Runner
-        }
+        GameObject m_lobbyUI;
+
 
         /// <summary>
         /// This flag controls whether the default UI is shown for the room player.
@@ -74,6 +66,7 @@ namespace Mirror
                     room.CallOnClientEnterRoom();
             }
             else Debug.LogError("RoomPlayer could not find a NetworkRoomManager. The RoomPlayer requires a NetworkRoomManager object to function. Make sure that there is one in the scene.");
+            m_lobbyUI = GameObject.Find("LobbyUI");
         }
 
         public virtual void OnDisable()
@@ -130,24 +123,12 @@ namespace Mirror
         /// </summary>
         public virtual void OnClientEnterRoom() 
         {
-            InstantiatePlayerBTN();
+            
         }
 
-        [Command(requiresAuthority = false)]
-
-        private void InstantiatePlayerBTN()
+        public override void OnStartLocalPlayer() 
         {
-            RpcInstantiatePlayerBTN();
-        }
-
-        [ClientRpc]
-        public void RpcInstantiatePlayerBTN()
-        {
-            if (isLocalPlayer)
-            {
-                GameObject m_test = Instantiate(m_Btnprefab, GameObject.Find("WaitingList").transform);
-                m_test.name = "PlayerBTN";
-            }
+            
         }
 
         public virtual void OnHunterTeamBTN()
