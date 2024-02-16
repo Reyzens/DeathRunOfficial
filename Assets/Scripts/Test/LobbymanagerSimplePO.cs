@@ -1,5 +1,6 @@
 using Mirror;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LobbymanagerSimplePO : MonoBehaviour
@@ -28,11 +29,24 @@ public class LobbymanagerSimplePO : MonoBehaviour
     private GameObject hunterPrefab;
     [SerializeField]
     private GameObject runnerPrefab;
+    [SerializeField]
+    private TextMeshProUGUI m_playername;
+    [SerializeField]
+    private TextMeshProUGUI m_ipAdress;
+    [SerializeField]
+    private TextMeshProUGUI m_playerPort;
 
     [SerializeField]
     private List<NetworkRoomPlayer> playerList = new List<NetworkRoomPlayer>();
     [SerializeField]
     private List<LobbyLinker> lobbyLinkerList = new List<LobbyLinker>();
+
+    [SerializeField]
+    public string m_username;
+    [SerializeField]
+    public string m_lobbyIp;
+    [SerializeField]
+    public string m_port;
 
     public void OnHostClick()
     {
@@ -40,6 +54,8 @@ public class LobbymanagerSimplePO : MonoBehaviour
         manager.StartHost();
         hostJoinPanel.SetActive(false);
         teamSelectionPanel.SetActive(true);
+        
+
     }
 
     public void OnJoinClick()
@@ -109,5 +125,20 @@ public class LobbymanagerSimplePO : MonoBehaviour
         Hunter,
         Runner,
         Count
+    }
+
+    public void OnPlayerNameInput()
+    {
+        m_username = m_playername.text;      
+    }
+
+    public void OnPlayerIpInput()
+    {
+        m_lobbyIp = m_ipAdress.text;
+    }
+
+    public void OnPlayerPortInput()
+    { 
+        m_port = m_playerPort.text;
     }
 }
