@@ -60,6 +60,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     public float m_rollDistance;
     public float m_rollSpeed;
     public bool m_isInvicible;
+    public float m_energyRollCost = 0.5f;
     #endregion
 
     public bool m_isWalking = false;
@@ -175,7 +176,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         {
             m_isCrouching = true;
         }
-        else if (m_currentState is SprintState)
+        else if (m_currentState is SprintState && m_energyAmount >= m_energyRollCost)
         {
             m_isRolling = true;
             Animator.SetBool("Rolling", true);
