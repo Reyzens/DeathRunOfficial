@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
+
 namespace Mirror
 {
     public enum PlayerSpawnMethod { Random, RoundRobin }
@@ -111,6 +112,7 @@ namespace Mirror
         [FormerlySerializedAs("m_PlayerPrefab")]
         [Tooltip("Prefab of the player object. Prefab must have a Network Identity component. May be an empty game object or a full avatar.")]
         public GameObject playerPrefab;
+        public GameObject playerRunner;
 
         /// <summary>Enable to automatically create player objects on connect and on scene change.</summary>
         [FormerlySerializedAs("m_AutoCreatePlayer")]
@@ -207,6 +209,11 @@ namespace Mirror
 
             // This avoids the mysterious "Replacing existing prefab with assetId ... Old prefab 'Player', New prefab 'Player'" warning.
             if (playerPrefab != null && spawnPrefabs.Contains(playerPrefab))
+            {
+                Debug.LogWarning("NetworkManager - Player Prefab doesn't need to be in Spawnable Prefabs list too. Removing it.");
+                spawnPrefabs.Remove(playerPrefab);
+            }
+            if (playerRunner != null && spawnPrefabs.Contains(playerPrefab))
             {
                 Debug.LogWarning("NetworkManager - Player Prefab doesn't need to be in Spawnable Prefabs list too. Removing it.");
                 spawnPrefabs.Remove(playerPrefab);
@@ -313,7 +320,7 @@ namespace Mirror
         // full server setup code, without spawning objects yet
         void SetupServer()
         {
-            // Debug.Log("NetworkManager SetupServer");
+            Debug.Log("NetworkManager SetupServer");
             InitializeSingleton();
 
             // apply settings before initializing anything
@@ -474,6 +481,7 @@ namespace Mirror
         /// <summary>Starts a network "host" - a server and client in the same application.</summary>
         public void StartHost()
         {
+            Debug.Log("Enter starthost");
             if (NetworkServer.active || NetworkClient.active)
             {
                 Debug.LogWarning("Server or Client already started.");
@@ -790,6 +798,8 @@ namespace Mirror
             NetworkClient.RegisterHandler<SceneMessage>(OnClientSceneInternal, false);
 
             if (playerPrefab != null)
+                NetworkClient.RegisterPrefab(playerPrefab);
+            if (playerRunner != null)
                 NetworkClient.RegisterPrefab(playerPrefab);
 
             foreach (GameObject prefab in spawnPrefabs.Where(t => t != null))
@@ -1380,11 +1390,17 @@ namespace Mirror
         {
             Transform startPos = GetStartPosition();
             GameObject player = startPos != null
-                ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+                ? Instantiate(playerPrefab)
                 : Instantiate(playerPrefab);
+
 
             // instantiating a "Player" prefab gives it the name "Player(clone)"
             // => appending the connectionId is WAY more useful for debugging!
+
+
+
+
+
             player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
             NetworkServer.AddPlayerForConnection(conn, player);
         }

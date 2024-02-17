@@ -33,7 +33,7 @@ public class TrapDoorController : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    private void CommandActivatedEffect()
+    public void CommandActivatedEffect()
     {
         ActivatedEffect();
     }

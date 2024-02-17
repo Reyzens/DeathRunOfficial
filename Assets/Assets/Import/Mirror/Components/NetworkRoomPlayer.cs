@@ -11,6 +11,15 @@ namespace Mirror
     [HelpURL("https://mirror-networking.gitbook.io/docs/components/network-room-player")]
     public class NetworkRoomPlayer : NetworkBehaviour
     {
+        [SerializeField]
+        GameObject m_Btnprefab;
+        [SerializeField]
+        GameObject m_lobbyUI;
+        [SerializeField]
+        MonoBehaviour m_infoGathering;
+        [SerializeField]
+        MonoBehaviour m_lobbyLinker;
+
         /// <summary>
         /// This flag controls whether the default UI is shown for the room player.
         /// <para>As this UI is rendered using the old GUI system, it is only recommended for testing purposes.</para>
@@ -60,6 +69,7 @@ namespace Mirror
                     room.CallOnClientEnterRoom();
             }
             else Debug.LogError("RoomPlayer could not find a NetworkRoomManager. The RoomPlayer requires a NetworkRoomManager object to function. Make sure that there is one in the scene.");
+            m_lobbyUI = GameObject.Find("LobbyUI");
         }
 
         public virtual void OnDisable()
@@ -77,7 +87,8 @@ namespace Mirror
 
         #region Commands
 
-        [Command]
+        //CHANGEMENT PO de [Command] a
+        [Command(requiresAuthority = false)]
         public void CmdChangeReadyState(bool readyState)
         {
             readyToBegin = readyState;
@@ -97,14 +108,14 @@ namespace Mirror
         /// </summary>
         /// <param name="oldIndex">The old index value</param>
         /// <param name="newIndex">The new index value</param>
-        public virtual void IndexChanged(int oldIndex, int newIndex) {}
+        public virtual void IndexChanged(int oldIndex, int newIndex) { }
 
         /// <summary>
         /// This is a hook that is invoked on clients when a RoomPlayer switches between ready or not ready.
         /// <para>This function is called when the a client player calls CmdChangeReadyState.</para>
         /// </summary>
         /// <param name="newReadyState">New Ready State</param>
-        public virtual void ReadyStateChanged(bool oldReadyState, bool newReadyState) {}
+        public virtual void ReadyStateChanged(bool oldReadyState, bool newReadyState) { }
 
         #endregion
 
@@ -114,12 +125,39 @@ namespace Mirror
         /// This is a hook that is invoked on clients for all room player objects when entering the room.
         /// <para>Note: isLocalPlayer is not guaranteed to be set until OnStartLocalPlayer is called.</para>
         /// </summary>
-        public virtual void OnClientEnterRoom() {}
+        public virtual void OnClientEnterRoom()
+        {
+
+        }
+
+        public override void OnStartLocalPlayer()
+        {
+
+        }
+
+        public virtual void OnHunterTeamBTN()
+        {
+            // With OnCLientEnterRoom, I made spawn a prefab at the waiting list
+            // Now here I want when i call this function, it will change is parent to the hunter list
+            // the issues is that we cant change a transform parent of a prefab(file corruption)
+            // so I need to change the parent of the prefab that I instantiated in the OnClientEnterRoom
+            // I need to find a way to change the parent of the prefab that I instantiated in the OnClientEnterRoom
+
+            GameObject.Find("PlayerBTN").transform.SetParent(GameObject.Find("HunterList").transform, false);
+        }
+        public virtual void OnRunnerTeamBTN()
+        {
+            GameObject.Find("PlayerBTN").transform.SetParent(GameObject.Find("RunnerList").transform, false);
+        }
+        public virtual void OnWaitingTeamBTN()
+        {
+            GameObject.Find("PlayerBTN").transform.SetParent(GameObject.Find("WaitingList").transform, false);
+        }
 
         /// <summary>
         /// This is a hook that is invoked on clients for all room player objects when exiting the room.
         /// </summary>
-        public virtual void OnClientExitRoom() {}
+        public virtual void OnClientExitRoom() { }
 
         #endregion
 
