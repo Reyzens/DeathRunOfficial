@@ -17,8 +17,11 @@ public class DeadTrigger : MonoBehaviour
 
                 if (runnerStateMachine != null)
                 {
-                    runnerStateMachine.m_isAlive = false;
-                    Debug.Log("Set m_isAlive to false");
+                    if (!runnerStateMachine.m_isInvicible)
+                    {
+                        runnerStateMachine.m_isAlive = false;
+                        Debug.Log("Set m_isAlive to false");
+                    }
                 }
             }
         }

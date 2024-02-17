@@ -6,7 +6,6 @@ public class SprintState : RunnerState
 {
     public override void OnEnter()
     {
-
         Debug.Log("Enter state: SprintState\n");
         m_stateMachine.m_speed *= m_stateMachine.m_sprintMultiplier;
         m_stateMachine.Animator.SetBool("Sprinting", true);
@@ -37,6 +36,6 @@ public class SprintState : RunnerState
 
     public override bool CanExit()
     {
-        return m_stateMachine.m_energyAmount <= 0 || m_stateMachine.m_isSprinting == false || m_stateMachine.m_isJumping;
+        return m_stateMachine.m_energyAmount <= 0 || m_stateMachine.m_isSprinting == false || m_stateMachine.m_isJumping || m_stateMachine.m_isRolling;
     }
 }

@@ -4,19 +4,31 @@ using UnityEngine;
 
 public class CrouchState : RunnerState
 {
+
     public override void OnEnter()
     {
-        Debug.Log("Enter state: FallingState");
+        Debug.Log("Enter state: CrouchState");
+        m_stateMachine.m_speed *= m_stateMachine.m_crouchMultiplier;
+        m_stateMachine.Animator.SetBool("Crouching", true);
+
+        m_stateMachine.Collider.height = m_stateMachine.m_crouchHeight;
+        m_stateMachine.Collider.center = new Vector3(m_stateMachine.Collider.center.x, m_stateMachine.m_crouchCenterY, m_stateMachine.Collider.center.z);
     }
 
     public override void OnExit()
     {
-        Debug.Log("Exit state: FallingState");
+        Debug.Log("Exit state: CrouchState");
+        m_stateMachine.Animator.SetBool("Crouching", false);
+        m_stateMachine.m_isCrouching = false;
+        m_stateMachine.m_speed /= m_stateMachine.m_crouchMultiplier;
+
+        m_stateMachine.Collider.height = m_stateMachine.m_originalHeight;
+        m_stateMachine.Collider.center = new Vector3(m_stateMachine.Collider.center.x, m_stateMachine.m_originalCenterY, m_stateMachine.Collider.center.z);
     }
 
     public override void OnFixedUpdate()
     {
-        ApplyInAirMovement();
+        m_stateMachine.ApplyMovement();
     }
 
     public override void OnUpdate()
@@ -24,23 +36,13 @@ public class CrouchState : RunnerState
 
     }
 
-    private void ApplyInAirMovement()
-    {
-        Vector3 inputDirection = m_stateMachine.m_direction;
-        if (m_stateMachine.m_input.sqrMagnitude == 0) return;
-
-        Vector3 moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y).normalized;
-        Vector3 force = moveDirection * m_stateMachine.m_speed * Time.fixedDeltaTime;
-        m_stateMachine.RB.AddForce(force, ForceMode.VelocityChange);
-    }
-
     public override bool CanEnter(IState currentState)
     {
-        return !m_stateMachine.IsInContactWithGround();
+        return m_stateMachine.m_isCrouching;
     }
 
     public override bool CanExit()
     {
-        return true;
+        return !m_stateMachine.m_isCrouching;
     }
 }

@@ -13,6 +13,9 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     [field: SerializeField] 
     public Rigidbody RB { get; private set; }
 
+    [field: SerializeField]
+    public CapsuleCollider Collider { get; set; }
+
     public Vector2 m_input;
     public Vector3 m_direction;
 
@@ -45,14 +48,21 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
     #region Crouch Variables
     public bool m_isCrouching = false;
+    public float m_crouchMultiplier = 0.75f;
+    public float m_crouchHeight = 1.40f;
+    public float m_crouchCenterY = 0.72f;
+    public float m_originalHeight;
+    public float m_originalCenterY;
     #endregion
 
     #region Roll Variables
     public bool m_isRolling = false;
+    public float m_rollDistance;
+    public float m_rollSpeed;
+    public bool m_isInvicible;
     #endregion
 
     public bool m_isWalking = false;
-    public bool m_isFalling = false;
 
 
     [SerializeField]
@@ -75,6 +85,10 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
     protected override void Start()
     {
+
+        m_originalCenterY = Collider.center.y;
+        m_originalHeight = Collider.height;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         foreach (RunnerState state in m_possibleStates)
@@ -130,6 +144,10 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
             m_isJumping = true;
             m_wasSprintingBeforeJump = true;
         }
+        else if (m_currentState is CrouchState)
+        {
+            m_isCrouching = false;
+        }
     }
 
     public void Sprint(InputAction.CallbackContext context)
@@ -160,6 +178,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         else if (m_currentState is SprintState)
         {
             m_isRolling = true;
+            Animator.SetBool("Rolling", true);
         }
         else if (m_currentState is CrouchState)
         {
