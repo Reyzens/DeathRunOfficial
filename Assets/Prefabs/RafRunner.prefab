@@ -75,6 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Animator>k__BackingField: {fileID: 1687758078652012136}
   <RB>k__BackingField: {fileID: 1247693659792166559}
+  <Collider>k__BackingField: {fileID: 5768098615063486672}
   m_input: {x: 0, y: 0}
   m_direction: {x: 0, y: 0, z: 0}
   m_speed: 5
@@ -94,9 +95,16 @@ MonoBehaviour:
   m_isSprinting: 0
   m_isAlive: 1
   m_isCrouching: 0
+  m_crouchMultiplier: 0.75
+  m_crouchHeight: 1.4
+  m_crouchCenterY: 0.72
+  m_originalHeight: 0
+  m_originalCenterY: 0
   m_isRolling: 0
+  m_rollDistance: 10
+  m_rollSpeed: 15
+  m_isInvicible: 0
   m_isWalking: 0
-  m_isFalling: 0
   cam: {fileID: 0}
   m_groundTrigger: {fileID: 3606138677286621935}
 --- !u!54 &1247693659792166559
@@ -340,8 +348,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858694034094861945}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40016305, y: -0.000000027312156, z: 0.0000000119257875, w: 0.91644394}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.40016302, y: 0.00000003375969, z: -0.000000014741087, w: 0.916444}
+  m_LocalPosition: {x: 0, y: -0.0000009536743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -723,7 +731,7 @@ Transform:
   m_GameObject: {fileID: 5281511399133488990}
   serializedVersion: 2
   m_LocalRotation: {x: 0.41672283, y: -0.000000027091316, z: 0.00000001241931, w: 0.9090336}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.0000009536743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -929,7 +937,7 @@ Transform:
   m_GameObject: {fileID: 8158619276331400969}
   serializedVersion: 2
   m_LocalRotation: {x: 0.43318874, y: -3.9955e-16, z: -1.3849232e-16, w: 0.90130323}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.0000009536743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
