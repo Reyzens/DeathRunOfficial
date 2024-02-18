@@ -5,6 +5,13 @@ using UnityEngine;
 public class TrapManager : NetworkBehaviour
 {
     [SerializeField]
+    private float m_FTCooldown = 7.0f;
+    [SerializeField]
+    private float m_doorCooldown;
+    [SerializeField]
+    private float m_platformCooldown;
+
+    [SerializeField]
     private List<FlamethrowerActivation> m_flamethrowerSerieOne = new List<FlamethrowerActivation>();
     [SerializeField]
     private List<FlamethrowerActivation> m_flamethrowerSerieTwo = new List<FlamethrowerActivation>();
@@ -33,26 +40,48 @@ public class TrapManager : NetworkBehaviour
     [SerializeField]
     private List<MovingPlatform> m_movingPlatformSerieOne = new List<MovingPlatform>();
 
+    [SyncVar]
+    private float m_FTSet1CD = -1f;
+    [SyncVar]
+    private float m_FTSet2CD = -1f;
+
+    private void Update()
+    {
+        if (isServer)
+        {
+            if (m_FTSet1CD > 0)
+            {
+                m_FTSet1CD -= Time.deltaTime;
+            }
+            if (m_FTSet2CD > 0)
+            {
+                m_FTSet2CD -= Time.deltaTime;
+            }
+        }
+    }
+
     public void OnFTSet1()
     {
         Debug.Log("Button clicked");
-        if (isClient)
+        if (isClient && m_FTSet1CD < 0)
         {
             foreach (FlamethrowerActivation flamethrower in m_flamethrowerSerieOne)
             {
                 flamethrower.CommandActivatedEffect();
             }
+            m_FTSet1CD = m_FTCooldown;
         }
     }
 
     public void OnFTSet2()
     {
-        if (isClient)
+        if (isClient && m_FTSet2CD < 0)
         {
             foreach (FlamethrowerActivation flamethrower in m_flamethrowerSerieTwo)
             {
                 flamethrower.CommandActivatedEffect();
             }
+            m_FTSet2CD = m_FTCooldown;
         }
     }
 
