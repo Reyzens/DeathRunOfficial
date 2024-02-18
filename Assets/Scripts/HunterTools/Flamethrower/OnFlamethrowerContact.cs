@@ -10,7 +10,7 @@ public class OnFlamethrowerContact : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-        Debug.Log("Collididng wth flame");
+        //Debug.Log("Collididng wth flame");
         if (other.CompareTag("DeathTrap"))
         {
             Debug.Log("Player collided with DeadTrigger");
