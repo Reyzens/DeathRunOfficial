@@ -13,6 +13,8 @@ public class LobbymanagerSimplePO : MonoBehaviour
     [SerializeField]
     private GameObject hostJoinPanel;
     [SerializeField]
+    private GameObject ReadyBottunUI;
+    [SerializeField]
     private GameObject readyPanel;
     [SerializeField]
     private GameObject readyBtn;
@@ -66,7 +68,9 @@ public class LobbymanagerSimplePO : MonoBehaviour
         manager.StartHost();
         hostJoinPanel.SetActive(false);
         teamSelectionPanel.SetActive(true);
-        
+        ReadyBottunUI.SetActive(true);
+
+
 
     }
 
@@ -76,6 +80,7 @@ public class LobbymanagerSimplePO : MonoBehaviour
         manager.StartClient();
         hostJoinPanel.SetActive(false);
         teamSelectionPanel.SetActive(true);
+        ReadyBottunUI.SetActive(true);
     }
 
     public void SetPlayer(ref NetworkRoomPlayer newPlayer)
