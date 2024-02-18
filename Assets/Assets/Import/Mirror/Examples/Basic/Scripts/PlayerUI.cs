@@ -23,6 +23,7 @@ namespace Mirror.Examples.Basic
         // Sets a highlight color for the local player
         public void SetLocalPlayer()
         {
+            m_playerButtonUI.image.color = new Color(0,133,255,255);
             // add a visual background for the local player in the UI
             //image.color = new Color(1f, 1f, 1f, 0.1f);
         }
@@ -45,5 +46,10 @@ namespace Mirror.Examples.Basic
             // Show the data in the UI
             //playerDataText.text = string.Format("Data: {0:000}", newPlayerData);
         }
+
+        public void SetName(string newName)
+        {
+            m_playerUserName.text = newName;
+        }    
     }
 }

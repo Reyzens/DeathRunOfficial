@@ -1,4 +1,5 @@
 using Mirror;
+using Mirror.Examples.Basic;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -35,7 +36,14 @@ public class LobbymanagerSimplePO : MonoBehaviour
     private TextMeshProUGUI m_ipAdress;
     [SerializeField]
     private TextMeshProUGUI m_playerPort;
-
+    [SerializeField]
+    private GameObject m_lobbyPlayerPrefabUI;
+    [SerializeField]
+    private GameObject m_hunterPanelRef;
+    [SerializeField]
+    private GameObject m_waitingPanelRef;
+    [SerializeField]
+    private GameObject m_runnerPanelRef;
     [SerializeField]
     private List<NetworkRoomPlayer> playerList = new List<NetworkRoomPlayer>();
     [SerializeField]
@@ -47,6 +55,10 @@ public class LobbymanagerSimplePO : MonoBehaviour
     public string m_lobbyIp;
     [SerializeField]
     public string m_port;
+    [SerializeField]
+    private bool hunterUIInstantiated = false;
+    [SerializeField]
+    private GameObject m_playerButtonUI;
 
     public void OnHostClick()
     {
@@ -104,20 +116,60 @@ public class LobbymanagerSimplePO : MonoBehaviour
 
     public void OnHunterClick()
     {
-        lobbyLinker.OnTeamSelection(ETeam.Hunter);
-        readyPanel.SetActive(true);
-    }
+        if (!hunterUIInstantiated) // Check if UI hasn't been instantiated yet
+        {
+            lobbyLinker.OnTeamSelection(ETeam.Hunter);
+            m_playerButtonUI = Instantiate(m_lobbyPlayerPrefabUI, m_hunterPanelRef.transform, false);
+            m_playerButtonUI.name = m_username;
+            m_playerButtonUI.GetComponent<PlayerUI>().SetName(m_username);
+            m_playerButtonUI.GetComponent<PlayerUI>().SetLocalPlayer();
 
+            hunterUIInstantiated = true; // Set flag to true to indicate UI instantiation
+        }
+        else
+        {
+            lobbyLinker.OnTeamSelection(ETeam.Hunter);
+            m_playerButtonUI.transform.SetParent(m_hunterPanelRef.transform, false);
+        }
+    }
+    //readyPanel.SetActive(true);
     public void OnChoosingClick()
     {
-        lobbyLinker.OnTeamSelection(ETeam.Count);
+        if (!hunterUIInstantiated) // Check if UI hasn't been instantiated yet
+        {
+            lobbyLinker.OnTeamSelection(ETeam.Count);
+            m_playerButtonUI = Instantiate(m_lobbyPlayerPrefabUI, m_waitingPanelRef.transform, false);
+            m_playerButtonUI.name = m_username;
+            m_playerButtonUI.GetComponent<PlayerUI>().SetName(m_username);
+            m_playerButtonUI.GetComponent<PlayerUI>().SetLocalPlayer();
+
+            hunterUIInstantiated = true; // Set flag to true to indicate UI instantiation
+        }
+        else
+        {
+            lobbyLinker.OnTeamSelection(ETeam.Count);
+            m_playerButtonUI.transform.SetParent(m_waitingPanelRef.transform, false);
+        }
         readyPanel.SetActive(false);
     }
 
     public void OnRunnerClick()
     {
-        lobbyLinker.OnTeamSelection(ETeam.Runner);
-        readyPanel.SetActive(true);
+        if (!hunterUIInstantiated) // Check if UI hasn't been instantiated yet
+        {
+            lobbyLinker.OnTeamSelection(ETeam.Runner);
+            m_playerButtonUI = Instantiate(m_lobbyPlayerPrefabUI, m_runnerPanelRef.transform, false);
+            m_playerButtonUI.name = m_username;
+            m_playerButtonUI.GetComponent<PlayerUI>().SetName(m_username);
+            m_playerButtonUI.GetComponent<PlayerUI>().SetLocalPlayer();
+
+            hunterUIInstantiated = true; // Set flag to true to indicate UI instantiation
+        }
+        else
+        {
+            lobbyLinker.OnTeamSelection(ETeam.Runner);
+            m_playerButtonUI.transform.SetParent(m_runnerPanelRef.transform, false);
+        }
     }
 
     public enum ETeam
