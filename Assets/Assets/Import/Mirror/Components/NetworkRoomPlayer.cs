@@ -19,6 +19,9 @@ namespace Mirror
         MonoBehaviour m_infoGathering;
         [SerializeField]
         MonoBehaviour m_lobbyLinker;
+        [SerializeField]
+        public GameObject m_playerInGamePrefab;
+
 
         /// <summary>
         /// This flag controls whether the default UI is shown for the room player.

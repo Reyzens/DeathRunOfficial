@@ -1,3 +1,4 @@
+using AiToolbox;
 using Mirror;
 using TMPro;
 using UnityEngine;
@@ -42,9 +43,10 @@ public class LobbyLinker : MonoBehaviour
 
     }
 
-    public void OnTeamSelection(ETeam newTeam)
+    public void OnTeamSelection(ETeam newTeam, GameObject prefab)
     {
         m_chooseTeam = newTeam;
+        GetComponent<NetworkRoomPlayer>().m_playerInGamePrefab = prefab;
     }
 
     public ETeam GetChosenTeam()
@@ -54,7 +56,8 @@ public class LobbyLinker : MonoBehaviour
 
     public void SetRole(GameObject role)
     {
-        m_selectedTeam = Instantiate(role, transform);
+        GetComponent<NetworkRoomPlayer>().m_playerInGamePrefab = role;
+        //m_selectedTeam = Instantiate(role, transform);
     }
 
     public void SetUsername(string name)

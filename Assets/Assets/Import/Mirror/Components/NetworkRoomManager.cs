@@ -135,11 +135,12 @@ namespace Mirror
             GameObject gamePlayer = OnRoomServerCreateGamePlayer(conn, roomPlayer);
             if (gamePlayer == null)
             {
+                var playerChoice = roomPlayer.GetComponent<NetworkRoomPlayer>().m_playerInGamePrefab;
                 // get start position from base class
                 Transform startPos = GetStartPosition();
                 gamePlayer = startPos != null
-                    ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-                    : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+                    ? Instantiate(playerChoice, startPos.position, startPos.rotation)
+                    : Instantiate(playerChoice, Vector3.zero, Quaternion.identity);
 
             }
 

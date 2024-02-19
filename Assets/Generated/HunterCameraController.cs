@@ -8,6 +8,10 @@ public class HunterCameraController : MonoBehaviour
 
     private CinemachinePathBase pathBase;
     private CinemachineVirtualCamera virtualCamera;
+    [SerializeField]
+    private Transform m_followCamera;
+    [SerializeField]
+    private Transform m_LookAtCamera;
 
     private void Start()
     {
@@ -15,6 +19,10 @@ public class HunterCameraController : MonoBehaviour
         if (virtualCamera != null)
         {
             pathBase = virtualCamera.GetCinemachineComponent<CinemachineTrackedDolly>().m_Path;
+            m_LookAtCamera = GameObject.Find("Plane").transform;
+            m_followCamera = GameObject.Find("Plane").transform;
+            virtualCamera.LookAt = m_LookAtCamera;
+            virtualCamera.Follow = m_followCamera;
         }
     }
 

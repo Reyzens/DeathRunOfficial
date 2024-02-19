@@ -89,6 +89,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
         m_originalCenterY = Collider.center.y;
         m_originalHeight = Collider.height;
+        cam = GameObject.Find("Main Camera").transform;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
