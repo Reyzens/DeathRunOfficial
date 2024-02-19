@@ -47,11 +47,15 @@ public class RollState : RunnerState
         if (elapsedTime < m_duration)
         {
             float progress = elapsedTime / m_duration;
-            m_stateMachine.transform.position = Vector3.Lerp(m_startPosition, m_endPosition, progress);
+            Vector3 newPosition = Vector3.Lerp(m_startPosition, m_endPosition, progress);
+
+            Vector3 velocity = (newPosition - m_stateMachine.transform.position) / Time.fixedDeltaTime;
+
+            m_stateMachine.RB.velocity = velocity;
         }
         else
         {
-            m_stateMachine.transform.position = m_endPosition;
+            m_stateMachine.RB.velocity = Vector3.zero;
         }
 
     }
