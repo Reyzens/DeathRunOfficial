@@ -21,6 +21,10 @@ namespace Mirror
         MonoBehaviour m_lobbyLinker;
         [SerializeField]
         public GameObject m_playerInGamePrefab;
+        [SerializeField]
+        [SyncVar(hook = nameof(PlayerRoleChanged))]
+        public int m_playerRole = 3;
+        
 
 
         /// <summary>
@@ -130,12 +134,24 @@ namespace Mirror
         /// </summary>
         public virtual void OnClientEnterRoom()
         {
-
+            
         }
 
         public override void OnStartLocalPlayer()
         {
 
+        }
+
+        public void SetPlayerRole(int newRole)
+        {
+            m_playerRole = newRole;
+        }
+
+        void PlayerRoleChanged(int oldRole, int newRole)
+        {
+            // Add any logic here that you want to execute when the player role changes
+            m_playerRole = newRole;
+            Debug.Log($"Player role changed from {oldRole} to {newRole}");
         }
 
         public virtual void OnHunterTeamBTN()

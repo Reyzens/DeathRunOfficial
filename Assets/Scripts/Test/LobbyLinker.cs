@@ -46,7 +46,7 @@ public class LobbyLinker : MonoBehaviour
     public void OnTeamSelection(ETeam newTeam, GameObject prefab)
     {
         m_chooseTeam = newTeam;
-        GetComponent<NetworkRoomPlayer>().m_playerInGamePrefab = prefab;
+        GetComponent<NetworkRoomPlayer>().SetPlayerRole((int)newTeam);
     }
 
     public ETeam GetChosenTeam()
