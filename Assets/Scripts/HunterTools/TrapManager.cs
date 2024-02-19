@@ -5,11 +5,13 @@ using UnityEngine;
 public class TrapManager : NetworkBehaviour
 {
     [SerializeField]
-    private float m_FTCooldown = 7.0f;
+    private float m_FTCooldown;
     [SerializeField]
     private float m_doorCooldown;
     [SerializeField]
-    private float m_platformCooldown;
+    private float m_platformAccelerationCooldown;
+    [SerializeField]
+    private float m_platformReverseCooldown;
 
     [SerializeField]
     private List<FlamethrowerActivation> m_flamethrowerSerieOne = new List<FlamethrowerActivation>();
@@ -40,13 +42,27 @@ public class TrapManager : NetworkBehaviour
     [SerializeField]
     private List<MovingPlatform> m_movingPlatformSerieOne = new List<MovingPlatform>();
 
+    //Flamethrower set cooldowns
     [SyncVar]
     private float m_FTSet1CD = -1f;
     [SyncVar]
     private float m_FTSet2CD = -1f;
+    [SyncVar]
+    private float m_FTSet3CD = -1f;
+    [SyncVar]
+    private float m_FTSet4CD = -1f;
+    [SyncVar]
+    private float m_FTSet5CD = -1f;
+
+    //Plateform cooldowns
+    [SyncVar]
+    private float m_plateformAccelerationCD = -1f;
+    [SyncVar]
+    private float m_plateformReverseCD = -1f;
 
     private void Update()
     {
+        //Flamethrower cooldown update
         if (isServer)
         {
             if (m_FTSet1CD > 0)
@@ -57,12 +73,35 @@ public class TrapManager : NetworkBehaviour
             {
                 m_FTSet2CD -= Time.deltaTime;
             }
+            if (m_FTSet3CD > 0)
+            {
+                m_FTSet3CD -= Time.deltaTime;
+            }
+            if (m_FTSet4CD > 0)
+            {
+                m_FTSet4CD -= Time.deltaTime;
+            }
+            if (m_FTSet5CD > 0)
+            {
+                m_FTSet5CD -= Time.deltaTime;
+            }
+
+            //Platform cd logic
+            if (m_plateformAccelerationCD > 0)
+            {
+                m_plateformAccelerationCD -= Time.deltaTime;
+            }
+            if (m_plateformReverseCD > 0)
+            {
+                m_plateformReverseCD -= Time.deltaTime;
+            }
+
         }
     }
 
     public void OnFTSet1()
     {
-        Debug.Log("Button clicked");
+        //Debug.Log("Button clicked");
         if (isClient && m_FTSet1CD < 0)
         {
             foreach (FlamethrowerActivation flamethrower in m_flamethrowerSerieOne)
@@ -87,34 +126,37 @@ public class TrapManager : NetworkBehaviour
 
     public void OnFTSet3()
     {
-        if (isClient)
+        if (isClient && m_FTSet3CD < 0)
         {
             foreach (FlamethrowerActivation flamethrower in m_flamethrowerSerieThree)
             {
                 flamethrower.CommandActivatedEffect();
             }
+            m_FTSet3CD = m_FTCooldown;
         }
     }
 
     public void OnFTSet4()
     {
-        if (isClient)
+        if (isClient && m_FTSet4CD < 0)
         {
             foreach (FlamethrowerActivation flamethrower in m_flamethrowerSerieFour)
             {
                 flamethrower.CommandActivatedEffect();
             }
+            m_FTSet4CD = m_FTCooldown;
         }
     }
 
     public void OnFTSet5()
     {
-        if (isClient)
+        if (isClient && m_FTSet5CD < 0)
         {
             foreach (FlamethrowerActivation flamethrower in m_flamethrowerSerieFive)
             {
                 flamethrower.CommandActivatedEffect();
             }
+            m_FTSet5CD = m_FTCooldown;
         }
     }
 
@@ -184,23 +226,25 @@ public class TrapManager : NetworkBehaviour
 
     public void InverseMovingPlatform()
     {
-        if (isClient)
+        if (isClient && m_plateformReverseCD < 0)
         {
             foreach (MovingPlatform movingPlatform in m_movingPlatformSerieOne)
             {
                 movingPlatform.CommandReverseActivation();
             }
+            m_plateformReverseCD = m_platformReverseCooldown;
         }
     }
 
     public void AccelerateMovingPlatform()
     {
-        if (isClient)
+        if (isClient && m_plateformAccelerationCD < 0)
         {
             foreach (MovingPlatform movingPlatform in m_movingPlatformSerieOne)
             {
                 movingPlatform.CommandAccelerateActivation();
             }
+            m_plateformAccelerationCD = m_platformAccelerationCooldown;
         }
     }
 }
