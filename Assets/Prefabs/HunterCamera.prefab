@@ -108,45 +108,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Virtual Camera Hunter SQUARE
       objectReference: {fileID: 0}
-    - target: {fileID: 8586324298188584384, guid: cee33bee3f2942b44994d8958663c9a1, type: 3}
-      propertyPath: m_Priority
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8586324298188584384, guid: cee33bee3f2942b44994d8958663c9a1, type: 3}
-      propertyPath: m_Lens.FieldOfView
-      value: 80
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7626930606911909511, guid: cee33bee3f2942b44994d8958663c9a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5239909755342004274}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cee33bee3f2942b44994d8958663c9a1, type: 3}
 --- !u!4 &6844787913937248624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5016418861499345045, guid: cee33bee3f2942b44994d8958663c9a1, type: 3}
   m_PrefabInstance: {fileID: 1972704420405774821}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8266419572356736866 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7626930606911909511, guid: cee33bee3f2942b44994d8958663c9a1, type: 3}
-  m_PrefabInstance: {fileID: 1972704420405774821}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5239909755342004274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8266419572356736866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2716d650bb77d4d47b2a93694f7e5ed2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
 --- !u!1001 &7440428938909683645
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4678,7 +4678,7 @@ MonoBehaviour:
   player: {fileID: 0}
   lobbyLinker: {fileID: 0}
   teamSelectionPanel: {fileID: 1485713853}
-  hunterPrefab: {fileID: 8301447295547883320, guid: e7f769431319bf5428a9f7bfd1726de2, type: 3}
+  hunterPrefab: {fileID: 8275368498302061931, guid: 9187f1c7f793ded4387540940b861297, type: 3}
   runnerPrefab: {fileID: 293382584818161380, guid: be7acfa1b6feff34791a5785c983e933, type: 3}
   m_playername: {fileID: 480855734}
   m_ipAdress: {fileID: 193975169}
@@ -4694,6 +4694,7 @@ MonoBehaviour:
   m_port: 
   hunterUIInstantiated: 0
   m_playerButtonUI: {fileID: 0}
+  m_chooseTeam: 0
 --- !u!4 &1361751443
 Transform:
   m_ObjectHideFlags: 0
