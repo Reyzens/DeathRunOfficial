@@ -5020,7 +5020,8 @@ MonoBehaviour:
   playerRunner: {fileID: 293382584818161380, guid: be7acfa1b6feff34791a5785c983e933, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 293382584818161380, guid: be7acfa1b6feff34791a5785c983e933, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
