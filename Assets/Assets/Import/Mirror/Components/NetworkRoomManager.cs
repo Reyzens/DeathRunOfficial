@@ -124,7 +124,7 @@ namespace Mirror
 
             if (Utils.IsSceneActive(RoomScene))
             {
-                // cant be ready in room, add to ready list
+                // Can't be ready in the room, add to ready list
                 PendingPlayer pending;
                 pending.conn = conn;
                 pending.roomPlayer = roomPlayer;
@@ -132,37 +132,39 @@ namespace Mirror
                 return;
             }
 
-            GameObject gamePlayer = OnRoomServerCreateGamePlayer(conn, roomPlayer);
-            if (gamePlayer == null)
+            GameObject gamePlayer = null;
+
+            // Get the team information from the room player
+            int teamInfo = roomPlayer.GetComponent<NetworkRoomPlayer>().m_playerRole;
+
+            // Instantiate the player prefab based on the team
+            switch (teamInfo)
             {
-                // get start position from base class
-                Transform startPos = GetStartPosition();
-                gamePlayer = startPos != null
-                    ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-                    : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+                case 0 :
+                    gamePlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+                    break;
+                case 1:
+                    gamePlayer = Instantiate(playerRunner, Vector3.zero, Quaternion.identity);
+                    break;
+                default:
+                    Debug.LogError("Unknown team information!");
+                    break;
             }
 
-            //GameObject gamePlayer = OnRoomServerCreateGamePlayer(conn, roomPlayer);
-            //
-            ////playerPrefab = roomPlayer.GetComponent<NetworkRoomPlayer>().m_playerInGamePrefab;
-            ////NetworkClient.RegisterPrefab(playerPrefab);
-            //if (gamePlayer == null)
-            //{
-            //    // get start position from base class
-            //    Transform startPos = GetStartPosition();
-            //    gamePlayer = startPos != null
-            //        ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-            //        : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-            //
-            //
-            //}
-            //
+            if (gamePlayer == null)
+            {
+                Debug.LogError("Failed to instantiate game player!");
+                return;
+            }
+
             if (!OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer))
                 return;
 
-            // replace room player with game player
+            // Replace room player with game player
             NetworkServer.ReplacePlayerForConnection(conn, gamePlayer, true);
         }
+
+
 
         internal void CallOnClientEnterRoom()
         {
