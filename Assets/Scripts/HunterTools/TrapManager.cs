@@ -1,10 +1,11 @@
 using Mirror;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class TrapManager : NetworkBehaviour
 {
 
-
+    [SerializeField]
     private TrapList m_sceneTrapList;
 
 
@@ -27,7 +28,12 @@ public class TrapManager : NetworkBehaviour
 
     private void Start()
     {
-        m_sceneTrapList = FindObjectOfType<TrapList>();
+        m_sceneTrapList = GameObject.FindObjectOfType<TrapList>();
+    }
+
+    private void Update()
+    {
+        m_sceneTrapList = GameObject.FindObjectOfType<TrapList>();
     }
 
     public void OnFTSet1()

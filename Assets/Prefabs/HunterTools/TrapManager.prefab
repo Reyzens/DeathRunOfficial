@@ -2149,7 +2149,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &6944813687433821626
 MonoBehaviour:
@@ -4762,7 +4762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3203482843157343843}
   - component: {fileID: 3298682320539274942}
-  - component: {fileID: 7070295927806559801}
+  - component: {fileID: 1232389815273756095}
   m_Layer: 0
   m_Name: TrapManager
   m_TagString: Untagged
@@ -4801,7 +4801,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
---- !u!114 &7070295927806559801
+  m_sceneTrapList: {fileID: 0}
+--- !u!114 &1232389815273756095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4813,7 +4814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clientStarted: 1
+  clientStarted: 0
   sceneId: 0
   _assetId: 153060619
   serverOnly: 0

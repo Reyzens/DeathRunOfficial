@@ -763,6 +763,7 @@ namespace Mirror
                 {
                     case 0:
                         Instantiate(HunterCamera, Vector3.zero, Quaternion.identity);
+                        Instantiate(HunterTrapManager, Vector3.zero, Quaternion.identity);
                         break;
                     case 1:
                         Instantiate(RunnerCamera, Vector3.zero, Quaternion.identity);

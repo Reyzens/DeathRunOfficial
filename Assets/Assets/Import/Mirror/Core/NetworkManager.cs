@@ -117,6 +117,7 @@ namespace Mirror
         public GameObject RunnerPrefab;
         public GameObject HunterCamera;
         public GameObject RunnerCamera;
+        public GameObject HunterTrapManager;
 
         /// <summary>Enable to automatically create player objects on connect and on scene change.</summary>
         [FormerlySerializedAs("m_AutoCreatePlayer")]
