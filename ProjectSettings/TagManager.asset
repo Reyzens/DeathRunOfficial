@@ -7,6 +7,8 @@ TagManager:
   - WaitingList
   - HunterList
   - RunnerList
+  - DeathTrap
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 

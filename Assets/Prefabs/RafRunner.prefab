@@ -82,6 +82,7 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 1687758078652012136}
   <RB>k__BackingField: {fileID: 1247693659792166559}
   <Collider>k__BackingField: {fileID: 5768098615063486672}
+  m_impulseOfDoorStrength: 100
   m_input: {x: 0, y: 0}
   m_direction: {x: 0, y: 0, z: 0}
   m_speed: 5
