@@ -81,6 +81,7 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 1687758078652012136}
   <RB>k__BackingField: {fileID: 1247693659792166559}
   <Collider>k__BackingField: {fileID: 5768098615063486672}
+  m_impulseOfDoorStrength: 0
   m_input: {x: 0, y: 0}
   m_direction: {x: 0, y: 0, z: 0}
   m_speed: 5
@@ -94,6 +95,7 @@ MonoBehaviour:
   m_forwardJumpMultiplier: 0.2
   m_sprintJumpBonus: 10
   m_wasSprintingBeforeJump: 0
+  m_doubleJumpCost: 0.5
   m_sprintMultiplier: 2
   m_maxEnergyAmount: 3
   m_energyAmount: 0
@@ -110,8 +112,7 @@ MonoBehaviour:
   m_rollSpeed: 10
   m_isInvicible: 0
   m_energyRollCost: 0.5
-  m_isWalking: 0
-  networkRunner: {fileID: 0}
+  m_networkRunner: {fileID: 0}
   m_groundTrigger: {fileID: 3606138677286621935}
 --- !u!54 &1247693659792166559
 Rigidbody:
@@ -330,10 +331,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  playerInput: {fileID: 8420818040470969216}
-  controllerStateMachine: {fileID: 5356308830585552065}
-  cameraTarget: {fileID: 5558704794448330211}
-  localRunnerPrefab: {fileID: 8317378488516555495, guid: c563f01eff61a8641b04d9afd6f7017d, type: 3}
+  m_playerInput: {fileID: 8420818040470969216}
+  m_controllerStateMachine: {fileID: 5356308830585552065}
+  m_cameraTarget: {fileID: 5558704794448330211}
+  m_localRunnerPrefab: {fileID: 8317378488516555495, guid: c563f01eff61a8641b04d9afd6f7017d, type: 3}
 --- !u!1 &4706473119456116851
 GameObject:
   m_ObjectHideFlags: 0
