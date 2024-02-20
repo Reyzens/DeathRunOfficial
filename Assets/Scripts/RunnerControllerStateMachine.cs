@@ -33,6 +33,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     public float m_forwardJumpMultiplier = 0.2f;
     public float m_sprintJumpBonus = 10f;
     public bool m_wasSprintingBeforeJump = false;
+    public float m_doubleJumpCost = 0.5f;
     #endregion
 
     #region Sprint Variables
@@ -67,7 +68,6 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
     private GameObject cam;
 
-    [SerializeField]
     public NetworkRunner networkRunner;
 
     [SerializeField]
