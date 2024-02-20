@@ -97,6 +97,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         }
         m_currentState = m_possibleStates[0];
         m_currentState.OnEnter();
+
     }
 
     protected override void Update()
@@ -104,6 +105,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         base.Update();
 
         UpdateAnimatorValues();
+        RB.isKinematic = false;
     }
 
     protected override void FixedUpdate()

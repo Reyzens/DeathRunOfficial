@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 6524771448081952055}
   - component: {fileID: 8420818040470969216}
   - component: {fileID: 4197550944898388104}
-  - component: {fileID: 7105227131490376910}
   m_Layer: 0
   m_Name: RafRunner
   m_TagString: Player
@@ -82,7 +81,7 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 1687758078652012136}
   <RB>k__BackingField: {fileID: 1247693659792166559}
   <Collider>k__BackingField: {fileID: 5768098615063486672}
-  m_impulseOfDoorStrength: 100
+  m_impulseOfDoorStrength: 300
   m_input: {x: 0, y: 0}
   m_direction: {x: 0, y: 0, z: 0}
   m_speed: 5
@@ -335,40 +334,6 @@ MonoBehaviour:
   controllerStateMachine: {fileID: 5356308830585552065}
   cameraTarget: {fileID: 5558704794448330211}
   thirdPersonCameraPrefab: {fileID: 8476399555577224507, guid: faf4582286eada348adf4259bc4bd9cb, type: 3}
---- !u!114 &7105227131490376910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293382584818161380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b20dc110904e47f8a154cdcf6433eae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  target: {fileID: 2478174972629387174}
-  syncPosition: 1
-  syncRotation: 1
-  syncScale: 0
-  interpolatePosition: 1
-  interpolateRotation: 1
-  interpolateScale: 1
-  coordinateSpace: 0
-  sendIntervalMultiplier: 1
-  timelineOffset: 0
-  showGizmos: 0
-  showOverlay: 0
-  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  onlySyncOnChange: 1
-  compressRotation: 1
-  bufferResetMultiplier: 3
-  positionSensitivity: 0.01
-  rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
 --- !u!1 &4706473119456116851
 GameObject:
   m_ObjectHideFlags: 0
