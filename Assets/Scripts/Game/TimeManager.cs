@@ -8,6 +8,14 @@ public class TimeManager : NetworkBehaviour
     private float m_GameDuration;
     [SerializeField]
     private TextMeshProUGUI m_clockText;
+    [SerializeField]
+    private GameObject m_hunterWinPanel;
+    [SerializeField]
+    private GameObject m_runnerWinPanel;
+
+    [SerializeField]
+    private GameObject m_winPanel;
+
     [SyncVar(hook = nameof(OnTimeLeftChanged))]
     private float m_timeLeft;
 
@@ -35,6 +43,7 @@ public class TimeManager : NetworkBehaviour
                 if (m_timeLeft != -1)
                 {
                     //NetworkManager.singleton.KickAllPlayers();
+                    HunterWin();
                     m_timeLeft = -1; // Prevent multiple scene changes
                 }
             }
@@ -48,5 +57,12 @@ public class TimeManager : NetworkBehaviour
         {
             m_clockText.text = $"Time left: {Mathf.Max(0, newTime):0.00}";
         }
+    }
+
+    [ClientRpc]
+    private void HunterWin()
+    {
+        m_winPanel.SetActive(true);
+        m_hunterWinPanel.SetActive(true);
     }
 }
