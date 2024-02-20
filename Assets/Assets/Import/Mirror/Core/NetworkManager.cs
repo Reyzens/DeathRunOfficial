@@ -896,6 +896,7 @@ namespace Mirror
             startPositions.Clear();
         }
 
+        public virtual void KickAllPlayers() { }
         // This is only set in ClientChangeScene below...never on server.
         // We need to check this in OnClientSceneChanged called from FinishLoadSceneClientOnly
         // to prevent AddPlayer message after loading/unloading additive scenes

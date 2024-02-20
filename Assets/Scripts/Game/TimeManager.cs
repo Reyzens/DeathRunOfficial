@@ -8,14 +8,16 @@ public class TimeManager : NetworkBehaviour
     private float m_GameDuration;
     [SerializeField]
     private TextMeshProUGUI m_clockText;
-    [SyncVar]
+    [SyncVar(hook = nameof(OnTimeLeftChanged))]
     private float m_timeLeft;
+
     // Start is called before the first frame update
     void Start()
     {
-        m_clockText.text = GetComponent<TextMeshProUGUI>().text;
-        if (isServer) { m_timeLeft = m_GameDuration; }
-
+        if (isServer)
+        {
+            m_timeLeft = m_GameDuration;
+        }
     }
 
     // Update is called once per frame
@@ -23,8 +25,28 @@ public class TimeManager : NetworkBehaviour
     {
         if (isServer)
         {
-            m_timeLeft -= Time.deltaTime;
-            m_clockText.text = "Time left : " + (m_GameDuration + m_timeLeft);
+            if (m_timeLeft > 0)
+            {
+                m_timeLeft -= Time.deltaTime;
+            }
+            else
+            {
+                // Ensure we only call this once by checking if m_timeLeft has not been set to a negative value already
+                if (m_timeLeft != -1)
+                {
+                    //NetworkManager.singleton.KickAllPlayers();
+                    m_timeLeft = -1; // Prevent multiple scene changes
+                }
+            }
+        }
+    }
+
+    private void OnTimeLeftChanged(float oldTime, float newTime)
+    {
+        // Update the UI element on all clients
+        if (m_clockText != null)
+        {
+            m_clockText.text = $"Time left: {Mathf.Max(0, newTime):0.00}";
         }
     }
 }

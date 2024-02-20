@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -23,6 +24,8 @@ namespace Mirror
             public NetworkConnectionToClient conn;
             public GameObject roomPlayer;
         }
+
+
 
         [Header("Room Settings")]
         [FormerlySerializedAs("m_ShowRoomGUI")]
@@ -72,6 +75,11 @@ namespace Mirror
         /// </summary>
         [Tooltip("List of Room Player objects")]
         public List<NetworkRoomPlayer> roomSlots = new List<NetworkRoomPlayer>();
+
+        public override void Start()
+        {
+            base.Start();
+        }
 
         public bool allPlayersReady
         {
@@ -349,6 +357,10 @@ namespace Mirror
         /// <param name="newSceneName"></param>
         public override void ServerChangeScene(string newSceneName)
         {
+            if (newSceneName == "RoomScene")
+            {
+                newSceneName = RoomScene;
+            }
             if (newSceneName == RoomScene)
             {
                 foreach (NetworkRoomPlayer roomPlayer in roomSlots)
@@ -658,8 +670,69 @@ namespace Mirror
         /// <summary>
         /// This is called on the client when disconnected from a server.
         /// </summary>
-        public virtual void OnRoomClientDisconnect() { }
+        public virtual void OnRoomClientDisconnect()
+        {
+            ServerChangeScene(RoomScene);
+        }
+        [Server]
+        public override void KickAllPlayers()
+        {
 
+            //// Instead of changing the scene, iterate over all connected players
+            //foreach (var conn in NetworkServer.connections.Values)
+            //{
+            //    if (conn.identity != null)
+            //    {
+            //        var roomPlayer = conn.identity.GetComponent<NetworkRoomPlayer>();
+            //        if (roomPlayer != null)
+            //        {
+            //            // Reset player state or move them to a designated reconnection area
+            //            // For example, reset their ready state, position, or any other relevant properties
+            //            roomPlayer.readyToBegin = false;
+            //            roomPlayer.transform.position = GetReconnectionPosition(); // Implement this method based on your game design
+            //            // Optionally, call custom methods on the player object to further manage reconnection
+
+            //            // Inform the player about the reconnection process if needed
+            //            //TargetReconnectPlayer(conn, "You have been reconnected. Please wait or take necessary actions.");
+            //        }
+            //    }
+            //}
+
+
+
+            foreach (var conn in NetworkServer.connections.Values)
+            {
+                if (conn != null)
+                {
+                    // This disconnects the player
+                    conn.Disconnect();
+                }
+            }
+
+            StartCoroutine(ShutdownServerAfterDelay(1.0f)); // 1 second delay, adjust as needed
+        }
+        private IEnumerator ShutdownServerAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            // Check if the server is also a host
+            if (NetworkServer.active && NetworkClient.isConnected)
+            {
+                // Stop host if this is a host server
+                NetworkManager.singleton.StopHost();
+            }
+            else if (NetworkServer.active)
+            {
+                // Stop server if this is a dedicated server
+                NetworkManager.singleton.StopServer();
+            }
+        }
+
+        private Vector3 GetReconnectionPosition()
+        {
+            // Return a default position or calculate based on your game's logic
+            return Vector3.zero;
+        }
         /// <summary>
         /// This is called on the client when a client is started.
         /// </summary>
