@@ -333,7 +333,12 @@ MonoBehaviour:
   playerInput: {fileID: 8420818040470969216}
   controllerStateMachine: {fileID: 5356308830585552065}
   cameraTarget: {fileID: 5558704794448330211}
+  localRunnerPrefab: {fileID: 8317378488516555495, guid: c563f01eff61a8641b04d9afd6f7017d, type: 3}
   thirdPersonCameraPrefab: {fileID: 8476399555577224507, guid: faf4582286eada348adf4259bc4bd9cb, type: 3}
+  engergyBar: {fileID: 0}
+  maxEnergy: 0
+  currentEnergy: 0
+  rollCost: 0
 --- !u!114 &7105227131490376910
 MonoBehaviour:
   m_ObjectHideFlags: 0

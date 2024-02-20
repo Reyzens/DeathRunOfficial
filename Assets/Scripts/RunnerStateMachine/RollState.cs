@@ -16,7 +16,7 @@ public class RollState : RunnerState
         m_stateMachine.Animator.SetBool("Rolling", true);
         m_stateMachine.m_isRolling = false;
 
-        m_stateMachine.m_energyAmount -= m_stateMachine.m_energyRollCost;
+        m_stateMachine.ReduceStamina(m_stateMachine.m_energyRollCost);
 
         m_startPosition = m_stateMachine.transform.position;
         m_endPosition = m_stateMachine.transform.position + m_stateMachine.transform.forward * m_stateMachine.m_rollDistance;

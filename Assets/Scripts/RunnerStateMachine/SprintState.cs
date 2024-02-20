@@ -18,8 +18,7 @@ public class SprintState : RunnerState
 
     public override void OnUpdate()
     {
-        Debug.Log("Engergy left: " + m_stateMachine.m_energyAmount);
-        m_stateMachine.m_energyAmount -= Time.deltaTime;
+        m_stateMachine.ReduceStamina(Time.deltaTime);
     }
     public override void OnExit()
     {

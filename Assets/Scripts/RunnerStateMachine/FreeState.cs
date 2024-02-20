@@ -18,7 +18,10 @@ public class FreeState : RunnerState
     public override void OnUpdate()
     {
         if (m_stateMachine.m_energyAmount < m_stateMachine.m_maxEnergyAmount)
+        {
             m_stateMachine.m_energyAmount += Time.deltaTime;
+            m_stateMachine.ReduceStamina(0);
+        }
     }
 
     public override void OnExit()
