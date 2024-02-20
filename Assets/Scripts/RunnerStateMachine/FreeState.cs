@@ -31,7 +31,7 @@ public class FreeState : RunnerState
 
     public override bool CanEnter(IState currentState)
     {
-        return m_stateMachine.IsInContactWithGround();
+        return m_stateMachine.IsInContactWithGround() || !m_stateMachine.m_isRolling;
     }
 
     public override bool CanExit()
