@@ -16,6 +16,8 @@ public class DoubleJumpState : RunnerState
 
         m_stateMachine.RB.AddForce(jumpForce, ForceMode.Impulse);
 
+        m_stateMachine.ReduceStamina(m_stateMachine.m_doubleJumpCost);
+
         m_stateMachine.m_numberOfJump++;
     }
 
