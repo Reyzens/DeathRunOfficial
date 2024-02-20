@@ -136,15 +136,19 @@ namespace Mirror
 
             // Get the team information from the room player
             int teamInfo = roomPlayer.GetComponent<NetworkRoomPlayer>().m_playerRole;
-
+            Transform startPos = GetStartPosition();
             // Instantiate the player prefab based on the team
             switch (teamInfo)
             {
                 case 0:
-                    gamePlayer = Instantiate(HunterPrefab, Vector3.zero, Quaternion.identity);
+                    gamePlayer = startPos != null
+                    ? Instantiate(HunterPrefab, startPos.position, startPos.rotation)
+                    : Instantiate(HunterPrefab, Vector3.zero, Quaternion.identity);
                     break;
                 case 1:
-                    gamePlayer = Instantiate(RunnerPrefab, Vector3.zero, Quaternion.identity);
+                    gamePlayer = startPos != null
+                    ? Instantiate(RunnerPrefab, startPos.position, startPos.rotation)
+                    : Instantiate(RunnerPrefab, Vector3.zero, Quaternion.identity);
                     break;
                 default:
                     Debug.LogError("Unknown team information!");

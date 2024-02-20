@@ -7,6 +7,9 @@ TagManager:
   - WaitingList
   - HunterList
   - RunnerList
+  - DeathTrap
+  - CM
+  - CheckpointRespawn
   layers:
   - Default
   - TransparentFX

@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3738464490948375622}
   - component: {fileID: 3422210064635510035}
-  - component: {fileID: 3391010427728497191}
+  - component: {fileID: 1251323077058521035}
   m_Layer: 0
   m_Name: CheckpointHitBox
-  m_TagString: Untagged
+  m_TagString: CheckpointRespawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.92, y: 7.45, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3391010427728497191
+--- !u!114 &1251323077058521035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,7 +63,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7164977572478526612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b5ca038fd280654db8665707bc2c9d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 99a939852ac5787479564f2bad4e29bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpoints: []
