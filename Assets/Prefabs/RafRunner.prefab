@@ -81,7 +81,6 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 1687758078652012136}
   <RB>k__BackingField: {fileID: 1247693659792166559}
   <Collider>k__BackingField: {fileID: 5768098615063486672}
-  m_impulseOfDoorStrength: 300
   m_input: {x: 0, y: 0}
   m_direction: {x: 0, y: 0, z: 0}
   m_speed: 5
@@ -112,6 +111,7 @@ MonoBehaviour:
   m_isInvicible: 0
   m_energyRollCost: 0.5
   m_isWalking: 0
+  networkRunner: {fileID: 0}
   m_groundTrigger: {fileID: 3606138677286621935}
 --- !u!54 &1247693659792166559
 Rigidbody:
@@ -333,7 +333,7 @@ MonoBehaviour:
   playerInput: {fileID: 8420818040470969216}
   controllerStateMachine: {fileID: 5356308830585552065}
   cameraTarget: {fileID: 5558704794448330211}
-  thirdPersonCameraPrefab: {fileID: 8476399555577224507, guid: faf4582286eada348adf4259bc4bd9cb, type: 3}
+  localRunnerPrefab: {fileID: 8317378488516555495, guid: c563f01eff61a8641b04d9afd6f7017d, type: 3}
 --- !u!1 &4706473119456116851
 GameObject:
   m_ObjectHideFlags: 0

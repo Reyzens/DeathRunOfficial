@@ -68,6 +68,9 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     private GameObject cam;
 
     [SerializeField]
+    public NetworkRunner networkRunner;
+
+    [SerializeField]
     private RunnerGroundTrigger m_groundTrigger;
 
     protected override void CreatePossibleStates()
@@ -88,6 +91,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         m_originalCenterY = Collider.center.y;
         m_originalHeight = Collider.height;
         cam = GameObject.FindGameObjectWithTag("MainCamera");
+        networkRunner = FindObjectOfType<NetworkRunner>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -212,6 +216,16 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     public bool IsInContactWithGround()
     {
         return m_groundTrigger.IsOnGround;
+    }
+
+    public void ReduceStamina(float amount)
+    {
+        m_energyAmount -= amount;
+        if (networkRunner != null)
+        {
+            Debug.Log("In Reduce Stamina");
+            networkRunner.RequestStaminaUpdate(m_energyAmount);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
