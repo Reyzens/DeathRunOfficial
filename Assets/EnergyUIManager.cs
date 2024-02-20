@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 public class EnergyUIManager : MonoBehaviour
 {
-    public Image energyImage;
+    public Image m_energyImage;
 
     public void UpdateStamina(float staminaValue)
     {
-        if (energyImage != null)
+        if (m_energyImage != null)
         {
             Debug.Log("In Update Stamina");
-            energyImage.fillAmount = staminaValue / 3f;
+            m_energyImage.fillAmount = staminaValue / 3f;
         }
     }
 }

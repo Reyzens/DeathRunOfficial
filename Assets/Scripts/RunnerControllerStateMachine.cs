@@ -64,11 +64,9 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     public float m_energyRollCost = 0.5f;
     #endregion
 
-    public bool m_isWalking = false;
+    private GameObject m_cam;
 
-    private GameObject cam;
-
-    public NetworkRunner networkRunner;
+    public NetworkRunner m_networkRunner;
 
     [SerializeField]
     private RunnerGroundTrigger m_groundTrigger;
@@ -90,8 +88,8 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
         m_originalCenterY = Collider.center.y;
         m_originalHeight = Collider.height;
-        cam = GameObject.FindGameObjectWithTag("MainCamera");
-        networkRunner = FindObjectOfType<NetworkRunner>();
+        m_cam = GameObject.FindGameObjectWithTag("MainCamera");
+        m_networkRunner = FindObjectOfType<NetworkRunner>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -197,7 +195,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         Vector3 inputDirection = m_direction;
         if (m_input.sqrMagnitude == 0) return;
 
-        var targetAngle = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
+        var targetAngle = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + m_cam.transform.eulerAngles.y;
 
         var angle = Mathf.SmoothDampAngle(RB.rotation.eulerAngles.y, targetAngle, ref m_currentVelocity, m_smoothTime);
 
@@ -221,10 +219,10 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     public void ReduceStamina(float amount)
     {
         m_energyAmount -= amount;
-        if (networkRunner != null)
+        if (m_networkRunner != null)
         {
             Debug.Log("In Reduce Stamina");
-            networkRunner.RequestStaminaUpdate(m_energyAmount);
+            m_networkRunner.RequestStaminaUpdate(m_energyAmount);
         }
     }
 

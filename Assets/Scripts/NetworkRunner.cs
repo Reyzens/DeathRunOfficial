@@ -8,31 +8,31 @@ using UnityEngine.UI;
 
 public class NetworkRunner : NetworkBehaviour
 {
-    public PlayerInput playerInput;
-    public RunnerControllerStateMachine controllerStateMachine;
-    public Transform cameraTarget;
-    public GameObject localRunnerPrefab;
-    private EnergyUIManager energyUIManager;
+    public PlayerInput m_playerInput;
+    public RunnerControllerStateMachine m_controllerStateMachine;
+    public Transform m_cameraTarget;
+    public GameObject m_localRunnerPrefab;
+    private EnergyUIManager m_energyUIManager;
 
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
 
         Debug.Log("OnStartLocalPlayer called.");
-        playerInput.enabled = true;
-        controllerStateMachine.enabled = true;
+        m_playerInput.enabled = true;
+        m_controllerStateMachine.enabled = true;
 
-        GameObject localRunnerInstance = Instantiate(localRunnerPrefab, transform.position, transform.rotation);
+        GameObject localRunnerInstance = Instantiate(m_localRunnerPrefab, transform.position, transform.rotation);
         Transform thirdPersonCameraTransform = localRunnerInstance.transform.Find("ThirdPersonCamera");
-        energyUIManager = FindObjectOfType<EnergyUIManager>();
+        m_energyUIManager = FindObjectOfType<EnergyUIManager>();
 
         CameraSetup(thirdPersonCameraTransform.gameObject);
     }
 
     private void CameraSetup(GameObject cameraInstance)
     {
-        cameraInstance.GetComponent<CinemachineFreeLook>().Follow = cameraTarget;
-        cameraInstance.GetComponent<CinemachineFreeLook>().LookAt = cameraTarget;
+        cameraInstance.GetComponent<CinemachineFreeLook>().Follow = m_cameraTarget;
+        cameraInstance.GetComponent<CinemachineFreeLook>().LookAt = m_cameraTarget;
     }
 
     public void RequestStaminaUpdate(float stamina)
@@ -43,16 +43,12 @@ public class NetworkRunner : NetworkBehaviour
             UpdateStaminaUI(stamina);
         }
     }
-
-    // Updates the UI with the new stamina value
     private void UpdateStaminaUI(float staminaValue)
     {
-        Debug.Log("YEWWWWHASsdfsdfsdfsfsf");
-
-        if (energyUIManager != null)
+        if (m_energyUIManager != null)
         {
             Debug.Log("In UpdateUI Stamina");
-            energyUIManager.UpdateStamina(staminaValue); // Assuming this method exists in your UI manager
+            m_energyUIManager.UpdateStamina(staminaValue);
         }
     }
 }
