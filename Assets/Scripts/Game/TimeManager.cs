@@ -14,6 +14,12 @@ public class TimeManager : NetworkBehaviour
     private GameObject m_runnerWinPanel;
     [SerializeField]
     private GameObject m_playAgainBTN;
+    [SerializeField]
+    private GameObject m_winCanvas;
+
+    [SerializeField]
+    [SyncVar(hook = nameof(OnRunnerWonChanged))]
+    private bool m_runnerWon = false;
 
     [SerializeField]
     private GameObject m_winPanel;
@@ -63,23 +69,36 @@ public class TimeManager : NetworkBehaviour
     [ClientRpc]
     private void HunterWin()
     {
-        m_winPanel.SetActive(true);
-        m_hunterWinPanel.SetActive(true);
-        m_playAgainBTN.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        if (!m_runnerWon)
+        {
+            m_winPanel.SetActive(true);
+            m_hunterWinPanel.SetActive(true);
+            m_playAgainBTN.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            m_winCanvas.GetComponent<Canvas>().sortingOrder = 10;
+        }
     }
 
-    [ClientRpc]
+    private void OnRunnerWonChanged(bool oldValue, bool newValue)
+    {
+        if (newValue)
+        {
+            // If runnerWon is now true, perform actions for when the runner wins.
+            m_winPanel.SetActive(true);
+            m_runnerWinPanel.SetActive(true);
+            m_playAgainBTN.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            m_winCanvas.GetComponent<Canvas>().sortingOrder = 10;
+        }
+    }
+
+    [Command(requiresAuthority = false)]
     public void RunnerWin()
     {
-        m_winPanel.SetActive(true);
-        m_runnerWinPanel.SetActive(true);
-        m_playAgainBTN.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        m_runnerWon = true;
     }
-
     public void OnPlayAgainBTN()
     {
 
