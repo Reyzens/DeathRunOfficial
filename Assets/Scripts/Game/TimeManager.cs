@@ -12,6 +12,8 @@ public class TimeManager : NetworkBehaviour
     private GameObject m_hunterWinPanel;
     [SerializeField]
     private GameObject m_runnerWinPanel;
+    [SerializeField]
+    private GameObject m_playAgainBTN;
 
     [SerializeField]
     private GameObject m_winPanel;
@@ -42,7 +44,6 @@ public class TimeManager : NetworkBehaviour
                 // Ensure we only call this once by checking if m_timeLeft has not been set to a negative value already
                 if (m_timeLeft != -1)
                 {
-                    //NetworkManager.singleton.KickAllPlayers();
                     HunterWin();
                     m_timeLeft = -1; // Prevent multiple scene changes
                 }
@@ -64,5 +65,45 @@ public class TimeManager : NetworkBehaviour
     {
         m_winPanel.SetActive(true);
         m_hunterWinPanel.SetActive(true);
+        m_playAgainBTN.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    [ClientRpc]
+    public void RunnerWin()
+    {
+        m_winPanel.SetActive(true);
+        m_runnerWinPanel.SetActive(true);
+        m_playAgainBTN.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void OnPlayAgainBTN()
+    {
+
+
+        //if (isClient)
+        //{
+        //    NetworkManager.singleton.StopClient();
+        //}
+        //if (isServer)
+        //{
+        //    NetworkManager.singleton.StopHost();
+        //}
+
+        //Destroy(GameObject.Find("NetworkManager"));
+
+        //foreach (GameObject roomPlayer in GameObject.FindObjectsOfType<GameObject>())
+        //{
+        //    if (roomPlayer.name == "SimpleRoomPlayer(Clone)")
+        //    {
+        //        Destroy(roomPlayer);
+        //    }
+        //}
+
+        //SceneManager.LoadScene("LobbyTest2PO");
+
     }
 }
