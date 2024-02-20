@@ -1,7 +1,8 @@
+using Mirror;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckpointTracker : MonoBehaviour
+public class CheckpointTracker : NetworkBehaviour
 {
     [Tooltip("List of all checkpoints in the game")]
     public List<GameObject> checkpoints;
@@ -15,15 +16,21 @@ public class CheckpointTracker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("You've won the game!");
-        }
-    }
+        if (!isServer) return;
 
-    private void WinGame()
-    {
-        Debug.Log("You've won the game!");
-        // Add your game winning logic here
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            if (visitedCheckpoints.Contains(other.gameObject))
+            {
+                return;
+            }
+
+            visitedCheckpoints.Add(other.gameObject);
+
+            if (visitedCheckpoints.Count == checkpoints.Count)
+            {
+                Debug.Log("All checkpoints visited!");
+            }
+        }
     }
 }

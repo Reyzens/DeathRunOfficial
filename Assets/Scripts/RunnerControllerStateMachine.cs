@@ -1,6 +1,3 @@
-using Cinemachine;
-using Mirror;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,11 +7,14 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     [field: SerializeField]
     public Animator Animator { get; private set; }
 
-    [field: SerializeField] 
+    [field: SerializeField]
     public Rigidbody RB { get; private set; }
 
     [field: SerializeField]
     public CapsuleCollider Collider { get; set; }
+
+    [field: SerializeField]
+    private float m_impulseOfDoorStrength;
 
     public Vector2 m_input;
     public Vector3 m_direction;
@@ -68,9 +68,6 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     private GameObject cam;
 
     [SerializeField]
-    public NetworkRunner networkRunner;
-
-    [SerializeField]
     private RunnerGroundTrigger m_groundTrigger;
 
     protected override void CreatePossibleStates()
@@ -91,7 +88,6 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         m_originalCenterY = Collider.center.y;
         m_originalHeight = Collider.height;
         cam = GameObject.FindGameObjectWithTag("MainCamera");
-        networkRunner = FindObjectOfType<NetworkRunner>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -101,6 +97,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         }
         m_currentState = m_possibleStates[0];
         m_currentState.OnEnter();
+
     }
 
     protected override void Update()
@@ -108,6 +105,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         base.Update();
 
         UpdateAnimatorValues();
+        RB.isKinematic = false;
     }
 
     protected override void FixedUpdate()
@@ -117,7 +115,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
     private void UpdateAnimatorValues()
     {
-        Animator.SetFloat("Horizontal", m_input.x) ;
+        Animator.SetFloat("Horizontal", m_input.x);
         Animator.SetFloat("Vertical", m_input.y);
         Animator.SetBool("TouchGround", IsInContactWithGround());
     }
@@ -216,13 +214,19 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         return m_groundTrigger.IsOnGround;
     }
 
-    public void ReduceStamina(float amount)
+    private void OnCollisionEnter(Collision collision)
     {
-        m_energyAmount -= amount;
-        if (networkRunner != null)
+        if (collision.gameObject.CompareTag("Door"))
         {
-            Debug.Log("In Reduce Stamina");
-            networkRunner.RequestStaminaUpdate(m_energyAmount);
+            Debug.Log("Door contact detected");
+
+            ContactPoint contact = collision.GetContact(0);
+
+            Vector3 impulseDirection = (transform.position - contact.point).normalized;
+
+            RB.AddForce(impulseDirection * m_impulseOfDoorStrength, ForceMode.Impulse);
+
+            Debug.Log("Impulse applied to the player.");
         }
     }
 }
