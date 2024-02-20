@@ -4695,6 +4695,7 @@ MonoBehaviour:
   hunterUIInstantiated: 0
   m_playerButtonUI: {fileID: 0}
   m_chooseTeam: 0
+  teamSelectionManager: {fileID: 1557896731}
 --- !u!4 &1361751443
 Transform:
   m_ObjectHideFlags: 0
@@ -4939,6 +4940,7 @@ GameObject:
   - component: {fileID: 1557896728}
   - component: {fileID: 1557896727}
   - component: {fileID: 1557896726}
+  - component: {fileID: 1557896731}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -5080,6 +5082,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1557896731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557896725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c478d5466407247928e9457bbd1e34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  hunterPanel: {fileID: 1692780247}
+  waitingPanel: {fileID: 406792710}
+  runnerPanel: {fileID: 1579950190}
+  hunterList: []
+  waitingList: []
+  runnerList: []
+  m_playerButtonUIPrefab: {fileID: 6291429020160904003, guid: 02d62dabddd26354aa9141c979264182, type: 3}
 --- !u!1 &1569185062
 GameObject:
   m_ObjectHideFlags: 0
