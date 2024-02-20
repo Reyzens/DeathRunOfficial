@@ -141,9 +141,7 @@ namespace Mirror
             switch (teamInfo)
             {
                 case 0:
-                    gamePlayer = startPos != null
-                    ? Instantiate(HunterPrefab, startPos.position, startPos.rotation)
-                    : Instantiate(HunterPrefab, Vector3.zero, Quaternion.identity);
+                    Instantiate(HunterPrefab, Vector3.zero, Quaternion.identity);
                     break;
                 case 1:
                     gamePlayer = startPos != null
