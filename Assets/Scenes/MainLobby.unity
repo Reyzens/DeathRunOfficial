@@ -4916,7 +4916,7 @@ MonoBehaviour:
   showRoomGUI: 1
   minPlayers: 1
   roomPlayerPrefab: {fileID: 2117276828475548357, guid: 13a792c2d7df9c7499b1fb296e81dd72, type: 3}
-  RoomScene: Assets/Scenes/LobbyTest2PO.unity
+  RoomScene: Assets/Scenes/MainLobby.unity
   GameplayScene: Assets/Scenes/Level.unity
   _allPlayersReady: 0
   roomSlots: []
