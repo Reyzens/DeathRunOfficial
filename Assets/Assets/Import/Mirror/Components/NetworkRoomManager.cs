@@ -140,11 +140,11 @@ namespace Mirror
             // Instantiate the player prefab based on the team
             switch (teamInfo)
             {
-                case 0 :
-                    gamePlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+                case 0:
+                    gamePlayer = Instantiate(HunterPrefab, Vector3.zero, Quaternion.identity);
                     break;
                 case 1:
-                    gamePlayer = Instantiate(playerRunner, Vector3.zero, Quaternion.identity);
+                    gamePlayer = Instantiate(RunnerPrefab, Vector3.zero, Quaternion.identity);
                     break;
                 default:
                     Debug.LogError("Unknown team information!");
@@ -450,7 +450,7 @@ namespace Mirror
             else
                 NetworkClient.RegisterPrefab(roomPlayerPrefab.gameObject);
 
-            if (playerPrefab == null)
+            if (HunterPrefab == null)
                 Debug.LogError("NetworkRoomManager no GamePlayer prefab is registered. Please add a GamePlayer prefab.");
 
             OnRoomStartClient();
@@ -671,8 +671,46 @@ namespace Mirror
         /// <summary>
         /// This is called on the client when the client is finished loading a new networked scene.
         /// </summary>
-        public virtual void OnRoomClientSceneChanged() { }
+        public virtual void OnRoomClientSceneChanged()
+        {
 
+            // Check if we have a local player. This may depend on how you've structured your game.
+            // For example, you might have a static reference to the local player, or you might find it in the scene.
+            NetworkRoomPlayer localPlayer = FindLocalPlayer();
+
+            if (localPlayer != null && localPlayer.isLocalPlayer)
+            {
+                // Get the team information from the room player
+                int teamInfo = localPlayer.GetComponent<NetworkRoomPlayer>().m_playerRole;
+
+                // Instantiate the player prefab based on the team
+                switch (teamInfo)
+                {
+                    case 0:
+                        Instantiate(HunterCamera, Vector3.zero, Quaternion.identity);
+                        break;
+                    case 1:
+                        Instantiate(RunnerCamera, Vector3.zero, Quaternion.identity);
+                        break;
+                    default:
+                        Debug.LogError("Unknown team information!");
+                        break;
+                }
+            }
+        }
+
+        NetworkRoomPlayer FindLocalPlayer()
+        {
+            // Assuming NetworkRoomPlayer is your player component
+            foreach (NetworkRoomPlayer player in FindObjectsOfType<NetworkRoomPlayer>())
+            {
+                if (player.isLocalPlayer)
+                {
+                    return player;
+                }
+            }
+            return null;
+        }
         #endregion
 
         #region optional UI

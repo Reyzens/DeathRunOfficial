@@ -12,7 +12,7 @@ namespace Mirror
     public enum NetworkManagerMode { Offline, ServerOnly, ClientOnly, Host }
     public enum HeadlessStartOptions { DoNothing, AutoStartServer, AutoStartClient }
 
-    public enum TeamSelector { Runner,Hunter,count}
+    public enum TeamSelector { Runner, Hunter, count }
 
     [DisallowMultipleComponent]
     [AddComponentMenu("Network/Network Manager")]
@@ -113,8 +113,10 @@ namespace Mirror
         [Header("Player Object")]
         [FormerlySerializedAs("m_PlayerPrefab")]
         [Tooltip("Prefab of the player object. Prefab must have a Network Identity component. May be an empty game object or a full avatar.")]
-        public GameObject playerPrefab;
-        public GameObject playerRunner;
+        public GameObject HunterPrefab;
+        public GameObject RunnerPrefab;
+        public GameObject HunterCamera;
+        public GameObject RunnerCamera;
 
         /// <summary>Enable to automatically create player objects on connect and on scene change.</summary>
         [FormerlySerializedAs("m_AutoCreatePlayer")]
@@ -203,22 +205,23 @@ namespace Mirror
             // always >= 0
             maxConnections = Mathf.Max(maxConnections, 0);
 
-            if (playerPrefab != null && !playerPrefab.TryGetComponent(out NetworkIdentity _))
+            if (HunterPrefab != null && !HunterPrefab.TryGetComponent(out NetworkIdentity _))
             {
                 Debug.LogError("NetworkManager - Player Prefab must have a NetworkIdentity.");
-                playerPrefab = null;
+                HunterPrefab = null;
             }
 
             // This avoids the mysterious "Replacing existing prefab with assetId ... Old prefab 'Player', New prefab 'Player'" warning.
-            if (playerPrefab != null && spawnPrefabs.Contains(playerPrefab))
+            if (HunterPrefab != null && spawnPrefabs.Contains(HunterPrefab))
             {
                 Debug.LogWarning("NetworkManager - Player Prefab doesn't need to be in Spawnable Prefabs list too. Removing it.");
-                spawnPrefabs.Remove(playerPrefab);
+                spawnPrefabs.Remove(HunterPrefab);
             }
-            if (playerRunner != null && spawnPrefabs.Contains(playerPrefab))
+
+            if (RunnerPrefab != null && spawnPrefabs.Contains(HunterPrefab))
             {
                 Debug.LogWarning("NetworkManager - Player Prefab doesn't need to be in Spawnable Prefabs list too. Removing it.");
-                spawnPrefabs.Remove(playerPrefab);
+                spawnPrefabs.Remove(HunterPrefab);
             }
         }
 
@@ -799,10 +802,14 @@ namespace Mirror
             NetworkClient.RegisterHandler<NotReadyMessage>(OnClientNotReadyMessageInternal);
             NetworkClient.RegisterHandler<SceneMessage>(OnClientSceneInternal, false);
 
-            if (playerPrefab != null)
-                NetworkClient.RegisterPrefab(playerPrefab);
-            if (playerRunner != null)
-                NetworkClient.RegisterPrefab(playerPrefab);
+            if (HunterPrefab != null)
+                NetworkClient.RegisterPrefab(HunterPrefab);
+            if (RunnerPrefab != null)
+                NetworkClient.RegisterPrefab(HunterPrefab);
+            if (HunterCamera != null)
+                NetworkClient.RegisterPrefab(HunterPrefab);
+            if (RunnerCamera != null)
+                NetworkClient.RegisterPrefab(HunterPrefab);
 
             foreach (GameObject prefab in spawnPrefabs.Where(t => t != null))
                 NetworkClient.RegisterPrefab(prefab);
@@ -1220,13 +1227,13 @@ namespace Mirror
         {
             //Debug.Log("NetworkManager.OnServerAddPlayer");
 
-            if (autoCreatePlayer && playerPrefab == null)
+            if (autoCreatePlayer && HunterPrefab == null)
             {
                 Debug.LogError("The PlayerPrefab is empty on the NetworkManager. Please setup a PlayerPrefab object.");
                 return;
             }
 
-            if (autoCreatePlayer && !playerPrefab.TryGetComponent(out NetworkIdentity _))
+            if (autoCreatePlayer && !HunterPrefab.TryGetComponent(out NetworkIdentity _))
             {
                 Debug.LogError("The PlayerPrefab does not have a NetworkIdentity. Please add a NetworkIdentity to the player prefab.");
                 return;
@@ -1392,8 +1399,8 @@ namespace Mirror
         {
             Transform startPos = GetStartPosition();
             GameObject player = startPos != null
-                ? Instantiate(playerPrefab)
-                : Instantiate(playerPrefab);
+                ? Instantiate(HunterPrefab)
+                : Instantiate(HunterPrefab);
 
 
             // instantiating a "Player" prefab gives it the name "Player(clone)"
@@ -1403,7 +1410,7 @@ namespace Mirror
 
 
 
-            player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
+            player.name = $"{HunterPrefab.name} [connId={conn.connectionId}]";
             NetworkServer.AddPlayerForConnection(conn, player);
         }
 

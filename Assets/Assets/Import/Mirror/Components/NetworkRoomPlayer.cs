@@ -141,8 +141,15 @@ namespace Mirror
         {
 
         }
-
+        
         public void SetPlayerRole(int newRole)
+        {
+
+            CmdSetPlayerRole(newRole);
+        }
+
+        [Command(requiresAuthority = false)]
+        public void CmdSetPlayerRole(int newRole)
         {
             m_playerRole = newRole;
         }
