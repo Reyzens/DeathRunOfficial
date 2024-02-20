@@ -39,7 +39,11 @@ public class PanelManager : NetworkBehaviour
 
     private void Update()
     {
-        PlayerUICheck();
+        if (hunterPanel != null && hunterPanel.gameObject.scene.name == "LobbyTest2PO")
+        {
+            Debug.Log("Should enter update");
+            PlayerUICheck();
+        }
     }
 
     public override void OnStartServer()
@@ -146,8 +150,10 @@ public class PanelManager : NetworkBehaviour
 
         if (isClient)
         {
+            Debug.Log("PlayerUIUpdate update");
             foreach (string username in hunterList)
             {
+                Debug.Log("Found " + username);
                 if (GameObject.Find(username) != null)
                 {
                     GameObject.Find(username).transform.SetParent(hunterPanel.transform, false);

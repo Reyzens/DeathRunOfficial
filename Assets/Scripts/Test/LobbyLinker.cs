@@ -1,6 +1,4 @@
-using AiToolbox;
 using Mirror;
-using TMPro;
 using UnityEngine;
 using static LobbymanagerSimplePO;
 
@@ -75,7 +73,7 @@ public class LobbyLinker : MonoBehaviour
     public string GetIpAdress()
     {
         return m_ipAdress;
-    }   
+    }
     public void SetPort(string Port)
     {
         m_port = Port;

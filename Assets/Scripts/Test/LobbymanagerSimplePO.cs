@@ -99,7 +99,7 @@ public class LobbymanagerSimplePO : MonoBehaviour
     }
     public void OnReadyClick()
     {
-        switch (lobbyLinker.GetChosenTeam())
+        switch (m_chooseTeam)
         {
             case ETeam.Hunter:
                 lobbyLinker.SetRole(hunterPrefab);
@@ -126,6 +126,8 @@ public class LobbymanagerSimplePO : MonoBehaviour
     {
         Debug.Log("Hunter click");
         teamSelectionManager.ChangePlayerTeam((int)ETeam.Hunter, m_username);
+        lobbyLinker.OnTeamSelection(ETeam.Hunter, hunterPrefab);
+        m_chooseTeam = ETeam.Hunter;
         //if (!hunterUIInstantiated) // Check if UI hasn't been instantiated yet
         //{
         //    lobbyLinker.OnTeamSelection(ETeam.Hunter, hunterPrefab);
@@ -150,6 +152,8 @@ public class LobbymanagerSimplePO : MonoBehaviour
     {
         Debug.Log("Waiting click");
         teamSelectionManager.ChangePlayerTeam((int)ETeam.Count, m_username);
+        lobbyLinker.OnTeamSelection(ETeam.Count, hunterPrefab);
+        m_chooseTeam = ETeam.Count;
         //if (!hunterUIInstantiated) // Check if UI hasn't been instantiated yet
         //{
         //    lobbyLinker.OnTeamSelection(ETeam.Count, hunterPrefab);
@@ -175,6 +179,8 @@ public class LobbymanagerSimplePO : MonoBehaviour
     {
         Debug.Log("Runner click");
         teamSelectionManager.ChangePlayerTeam((int)ETeam.Runner, m_username);
+        lobbyLinker.OnTeamSelection(ETeam.Runner, runnerPrefab);
+        m_chooseTeam = ETeam.Runner;
         //if (!hunterUIInstantiated) // Check if UI hasn't been instantiated yet
         //{
         //    lobbyLinker.OnTeamSelection(ETeam.Runner, runnerPrefab);
