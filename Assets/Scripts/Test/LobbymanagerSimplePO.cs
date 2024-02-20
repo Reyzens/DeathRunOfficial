@@ -14,12 +14,6 @@ public class LobbymanagerSimplePO : MonoBehaviour
     [SerializeField]
     private GameObject ReadyBottunUI;
     [SerializeField]
-    private GameObject readyPanel;
-    [SerializeField]
-    private GameObject readyBtn;
-    [SerializeField]
-    private GameObject startGameBtn;
-    [SerializeField]
     private GameObject cancelReadyBtn;
     [SerializeField]
     private NetworkRoomPlayer player;
@@ -71,10 +65,7 @@ public class LobbymanagerSimplePO : MonoBehaviour
         manager.StartHost();
         hostJoinPanel.SetActive(false);
         teamSelectionPanel.SetActive(true);
-        ReadyBottunUI.SetActive(true);
-
-
-
+        ReadyBottunUI.SetActive(false);
     }
 
     public void OnJoinClick()
@@ -83,7 +74,7 @@ public class LobbymanagerSimplePO : MonoBehaviour
         manager.StartClient();
         hostJoinPanel.SetActive(false);
         teamSelectionPanel.SetActive(true);
-        ReadyBottunUI.SetActive(true);
+        ReadyBottunUI.SetActive(false);
     }
 
     public void SetPlayer(ref NetworkRoomPlayer newPlayer)
@@ -111,20 +102,21 @@ public class LobbymanagerSimplePO : MonoBehaviour
                 break;
         }
         player.CmdChangeReadyState(true);
-        readyBtn.SetActive(false);
+        ReadyBottunUI.SetActive(false);
         cancelReadyBtn.SetActive(true);
     }
 
     public void OnCancelClick()
     {
         player.CmdChangeReadyState(false);
-        readyBtn.SetActive(true);
+        ReadyBottunUI.SetActive(true);
         cancelReadyBtn.SetActive(false);
     }
 
     public void OnHunterClick()
     {
         Debug.Log("Hunter click");
+        ReadyBottunUI.SetActive(true);
         teamSelectionManager.ChangePlayerTeam((int)ETeam.Hunter, m_username);
         lobbyLinker.OnTeamSelection(ETeam.Hunter, hunterPrefab);
         m_chooseTeam = ETeam.Hunter;
@@ -150,6 +142,9 @@ public class LobbymanagerSimplePO : MonoBehaviour
 
     public void OnChoosingClick()
     {
+        ReadyBottunUI.SetActive(false);
+        cancelReadyBtn.SetActive(false);
+        player.CmdChangeReadyState(false);
         Debug.Log("Waiting click");
         teamSelectionManager.ChangePlayerTeam((int)ETeam.Count, m_username);
         lobbyLinker.OnTeamSelection(ETeam.Count, hunterPrefab);
@@ -171,13 +166,13 @@ public class LobbymanagerSimplePO : MonoBehaviour
         //    m_playerButtonUI.transform.SetParent(m_waitingPanelRef.transform, false);
         //    m_chooseTeam = ETeam.Count;
         //}
-        readyPanel.SetActive(false);
     }
 
 
     public void OnRunnerClick()
     {
         Debug.Log("Runner click");
+        ReadyBottunUI.SetActive(true);
         teamSelectionManager.ChangePlayerTeam((int)ETeam.Runner, m_username);
         lobbyLinker.OnTeamSelection(ETeam.Runner, runnerPrefab);
         m_chooseTeam = ETeam.Runner;

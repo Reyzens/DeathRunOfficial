@@ -41,7 +41,7 @@ public class PanelManager : NetworkBehaviour
     {
         if (hunterPanel != null && hunterPanel.gameObject.scene.name == "LobbyTest2PO")
         {
-            Debug.Log("Should enter update");
+            //Debug.Log("Should enter update");
             PlayerUICheck();
         }
     }
@@ -150,10 +150,10 @@ public class PanelManager : NetworkBehaviour
 
         if (isClient)
         {
-            Debug.Log("PlayerUIUpdate update");
+            //Debug.Log("PlayerUIUpdate update");
             foreach (string username in hunterList)
             {
-                Debug.Log("Found " + username);
+                //Debug.Log("Found " + username);
                 if (GameObject.Find(username) != null)
                 {
                     GameObject.Find(username).transform.SetParent(hunterPanel.transform, false);
