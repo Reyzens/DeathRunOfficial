@@ -118,7 +118,9 @@ namespace Mirror
         public GameObject HunterCamera;
         public GameObject RunnerCamera;
         public GameObject HunterTrapManager;
-
+        [SerializeField]
+        [Scene]
+        public string m_bridge;
         /// <summary>Enable to automatically create player objects on connect and on scene change.</summary>
         [FormerlySerializedAs("m_AutoCreatePlayer")]
         [Tooltip("Should Mirror automatically spawn the player after scene change?")]

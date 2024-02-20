@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5335ec591ca79a14784e4922d728213e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_scene: Assets/Scenes/LobbyTest2PO.unity
+  m_scene: Assets/Scenes/MainLobby.unity
 --- !u!114 &182277218
 MonoBehaviour:
   m_ObjectHideFlags: 0

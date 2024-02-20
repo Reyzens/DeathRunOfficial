@@ -64,5 +64,15 @@ public class TimeManager : NetworkBehaviour
     {
         m_winPanel.SetActive(true);
         m_hunterWinPanel.SetActive(true);
+        NetworkManager.singleton.ServerChangeScene(NetworkManager.singleton.m_bridge);
+        if(isServer)
+        {
+            NetworkManager.singleton.StopHost();
+        }
+        if(isClient)
+        {
+            NetworkManager.singleton.StopClient();
+        }
+        
     }
 }

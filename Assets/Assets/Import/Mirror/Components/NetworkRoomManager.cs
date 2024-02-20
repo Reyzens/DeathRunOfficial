@@ -27,6 +27,7 @@ namespace Mirror
 
 
 
+
         [Header("Room Settings")]
         [FormerlySerializedAs("m_ShowRoomGUI")]
         [SerializeField]
@@ -670,9 +671,19 @@ namespace Mirror
         /// <summary>
         /// This is called on the client when disconnected from a server.
         /// </summary>
+        /// 
+        public virtual void OnRoomHostDisconnect() 
+        {
+            ServerChangeScene(m_bridge);
+            StopServer();
+            StopHost();
+            Destroy(NetworkManager.singleton.gameObject);
+        }
         public virtual void OnRoomClientDisconnect()
         {
-            ServerChangeScene(RoomScene);
+            ServerChangeScene(m_bridge);
+            
+            Destroy(NetworkManager.singleton.gameObject);  
         }
         [Server]
         public override void KickAllPlayers()
