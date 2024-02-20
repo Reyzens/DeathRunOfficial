@@ -12,6 +12,8 @@ public class TimeManager : NetworkBehaviour
     private GameObject m_hunterWinPanel;
     [SerializeField]
     private GameObject m_runnerWinPanel;
+    [SerializeField]
+    private GameObject m_winCanvas;
 
     [SerializeField]
     private GameObject m_winPanel;
@@ -60,19 +62,44 @@ public class TimeManager : NetworkBehaviour
     }
 
     [ClientRpc]
+    public void RunnerWin()
+    {
+        m_winPanel.SetActive(true);
+        m_runnerWinPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        m_winCanvas.GetComponent<Canvas>().sortingOrder = 10;
+        //NetworkManager.singleton.ServerChangeScene(NetworkManager.singleton.m_bridge);
+        //if (isServer)
+        //{
+        //    NetworkManager.singleton.StopHost();
+        //    NetworkManager.singleton.StopServer();
+        //}
+        //if (isClient)
+        //{
+        //    NetworkManager.singleton.StopClient();
+        //}
+    }
+
+    [ClientRpc]
     private void HunterWin()
     {
         m_winPanel.SetActive(true);
         m_hunterWinPanel.SetActive(true);
-        NetworkManager.singleton.ServerChangeScene(NetworkManager.singleton.m_bridge);
-        if(isServer)
-        {
-            NetworkManager.singleton.StopHost();
-        }
-        if(isClient)
-        {
-            NetworkManager.singleton.StopClient();
-        }
-        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        m_winCanvas.GetComponent<Canvas>().sortingOrder = 10;
+
+        //NetworkManager.singleton.ServerChangeScene(NetworkManager.singleton.m_bridge);
+        //if (isServer)
+        //{
+        //    NetworkManager.singleton.StopHost();
+        //    NetworkManager.singleton.StopServer();
+        //}
+        //if (isClient)
+        //{
+        //    NetworkManager.singleton.StopClient();
+        //}
+
     }
 }

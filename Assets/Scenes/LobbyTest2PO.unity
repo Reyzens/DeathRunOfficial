@@ -4894,6 +4894,7 @@ MonoBehaviour:
   HunterCamera: {fileID: 8008957531992422957, guid: a23cdd20fdd3b3c4c9b7f8abaff67c32, type: 3}
   RunnerCamera: {fileID: 8317378488516555495, guid: c563f01eff61a8641b04d9afd6f7017d, type: 3}
   HunterTrapManager: {fileID: 8746930063696349962, guid: c379c1fee06d14448b289548138cb796, type: 3}
+  m_bridge: Assets/Scenes/TEST SCENE/Bridge.unity
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
