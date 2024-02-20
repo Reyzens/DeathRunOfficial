@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 public abstract class BaseStateMachine<T> : MonoBehaviour where T : IState
@@ -36,7 +37,6 @@ public abstract class BaseStateMachine<T> : MonoBehaviour where T : IState
     {
 
     }
-
 
     protected void TryStateTransition()
     {

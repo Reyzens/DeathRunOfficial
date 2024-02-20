@@ -65,9 +65,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
     public bool m_isWalking = false;
 
-
-    [SerializeField]
-    public Transform cam;
+    private GameObject cam;
 
     [SerializeField]
     private RunnerGroundTrigger m_groundTrigger;
@@ -89,7 +87,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
 
         m_originalCenterY = Collider.center.y;
         m_originalHeight = Collider.height;
-        cam = GameObject.Find("Main Camera").transform;
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -193,7 +191,7 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
         Vector3 inputDirection = m_direction;
         if (m_input.sqrMagnitude == 0) return;
 
-        var targetAngle = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        var targetAngle = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
 
         var angle = Mathf.SmoothDampAngle(RB.rotation.eulerAngles.y, targetAngle, ref m_currentVelocity, m_smoothTime);
 
@@ -213,5 +211,4 @@ public class RunnerControllerStateMachine : BaseStateMachine<RunnerState>
     {
         return m_groundTrigger.IsOnGround;
     }
-
 }
