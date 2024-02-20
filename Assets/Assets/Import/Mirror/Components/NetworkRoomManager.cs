@@ -765,7 +765,7 @@ namespace Mirror
                         Instantiate(HunterCamera, Vector3.zero, Quaternion.identity);
                         break;
                     case 1:
-                        Instantiate(RunnerCamera, Vector3.zero, Quaternion.identity);
+                        //Instantiate(RunnerCamera, Vector3.zero, Quaternion.identity);
                         break;
                     default:
                         Debug.LogError("Unknown team information!");
