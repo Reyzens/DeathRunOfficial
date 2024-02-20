@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164f5eaa7f0d7804aab65e840926b939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyImage: {fileID: 5837506736412251001}
+  m_energyImage: {fileID: 5837506736412251001}
 --- !u!1001 &1595834141187685306
 PrefabInstance:
   m_ObjectHideFlags: 0
